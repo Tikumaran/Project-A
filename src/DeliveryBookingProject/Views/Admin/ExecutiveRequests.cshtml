@@ -1,0 +1,78 @@
+﻿@model IEnumerable<DeliveryBookingProject.Models.DeliveryExecutive>
+
+@{
+    ViewData["Title"] = "ExecutiveRequests";
+}
+
+<h1>ExecutiveRequests</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ExecutiveId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExecutiveName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Age)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.City)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsVerified)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @using (Html.BeginForm("EditExecutiveReqest", "Admin", FormMethod.Post))
+        {
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ExecutiveId, new { @name = "ID"})
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ExecutiveName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Age)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Phone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.City)
+                    </td>
+                    <td>
+                        <select class="form-control" name="IsVerified">
+                            <option>@Html.ValueFor(modelItem => item.IsVerified)</option>
+                            <option>Verified</option>
+                            <option>Rejected</option>
+                        </select>
+                    </td>
+                    <td>
+                        @{
+                            TempData["ID"] = @Html.ValueFor(modelItem => item.ExecutiveId);
+                        }
+                        <input type="submit" class="btn btn-primary" value="Update" />
+                    </td>
+                </tr>
+             }
+        }
+    </tbody>
+</table>

@@ -1,0 +1,56 @@
+﻿@model DeliveryBookingProject.Models.User
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+</head>
+<body>
+    <h4>Login</h4>
+    <br />
+    <div class="row">
+        <div class="col-md-4">
+            <form action="Login" method="post">
+                <table>
+                    <tr>
+                        <th>
+                            @Html.LabelFor(m => m.UserName, new { @class = "form-control" })
+                        </th>
+                        <td>
+                            @Html.EditorFor(m => m.UserName, new { @class = "form-control" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            @Html.LabelFor(m => m.Password, new { @class = "form-control" })
+                        </th>
+                        <td>
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            @Html.LabelFor(m => m.UserType, new { @Class = "form-control" })
+                        </th>
+                        <td>
+                            Customer:  @Html.RadioButtonFor(m => m.UserType, "Customer", new { @Class = "form-control" })
+                            Executive: @Html.RadioButtonFor(m => m.UserType, "Executive", new { @Class = "form-control" })
+                        </td>
+                    </tr>
+                </table>
+                <div class="form-group">
+                    <input type="submit" value="SignIn" class="btn btn-primary" />
+                    <button type="reset" value="Reset" class="btn btn-primary">ReSet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        @Html.ActionLink(" CustomerSignUp ", "Register", "Customer") |
+        @Html.ActionLink(" ExecutiveSignUp ", "Register", "Executive")
+    </div>
+</body>
+</html>

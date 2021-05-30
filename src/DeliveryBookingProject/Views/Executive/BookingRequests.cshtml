@@ -1,0 +1,61 @@
+﻿@model IEnumerable<DeliveryBookingProject.Models.DeliveryBooking>
+@{
+    ViewData["Title"] = "BookingRequests";
+}
+
+<h1>BookingRequests</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model=> model.CustomerId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PickUpDateTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BookingStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Message)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WeightOfPackage)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PickUpDateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookingStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Message)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WeightOfPackage)
+            </td>
+            <td>
+                @{
+                    TempData["OrderId"] = item.OrderId;
+                }
+                <a asp-action="BookingDetailById" asp-controller="Executive" class="btn btn-primary btn-large">Show Details</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
