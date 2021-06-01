@@ -1,0 +1,180 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - DeliveryBookingProject</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-tabs navbar-expand-sm bg-dark navbar-dark">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Delivery Booking Project</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <ul class="nav navbar-nav align-content-center">
+                        <li class="nav-item">
+                            @if (TempData.Peek("ExeID") != null)
+                            {
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Executive" asp-action="Home">Home</a>
+                            }
+                            else if (TempData.Peek("UserID") != null)
+                            {
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="Home">Home</a>
+                            }
+                            else if (TempData.Peek("AUName") != null)
+                            {
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Home">Home</a>
+                            }
+                            else
+                            {
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            }
+                        </li>
+                        <li class="nav-item">
+                            @if (TempData.Peek("ExeID") != null)
+                            {
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Executive" asp-action="BookingRequests">Customers Requests</a>
+                            }
+                            else if (TempData.Peek("UserID") != null)
+                            {
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="BookingExecutive">Add Booking</a>
+                            }
+                            else if (TempData.Peek("AUName") != null)
+                            {
+                                <div class="dropdown">
+                                    <button class="dropbtn">User Requests</button>
+                                    <div class="dropdown-content">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="CustomerRequests">Customer Requests</a>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="ExecutiveRequests">Executive Requests</a>
+                                    </div>
+                                </div>
+                            }
+                        </li>
+                        <li class="nav-item">
+                            @if (TempData.Peek("ExeID") != null)
+                            {
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Executive" asp-action="TrackOrder">Pending Orders</a>
+                            }
+                            else if (TempData.Peek("UserID") != null)
+                            {
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="BookingStatus">Booking Status</a>
+                            }
+                            else if (TempData.Peek("AUName") != null)
+                            {
+                                <div class="dropdown">
+                                    <button class="dropbtn">Users Details</button>
+                                    <div class="dropdown-content">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="CustomerDetails">Customers</a>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="ExecutiveDetails">Executives</a>
+                                    </div>
+                                </div>
+                            }
+                        </li>
+                        <li class="nav-item">
+                            @if (TempData.Peek("ExeID") != null)
+                            {
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Executive" asp-action="BookingDetails">Your Orders</a>
+                            }
+                            else if (TempData.Peek("UserID") != null)
+                            {
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="BookingDetails">Your Orders</a>
+                            }
+                            else if (TempData.Peek("AUName") != null)
+                            {
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="OrdersDetails">Booking Orders</a>
+                            }
+                            else
+                            {
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="ContactUs">Contact Us</a>
+                            }
+                        </li>
+                        <li class="nav-item" style="float:right;">
+                            @if (TempData.Peek("ExeID") != null)
+                            {
+                                <div class="text-xl-right">
+                                    <label>@TempData.Peek("Exec_Name")</label>
+                                </div>
+                            }
+                            else if (TempData.Peek("UserID") != null)
+                            {
+                                <div class="text-xl-right">
+                                    <label>@TempData.Peek("Cust_Name")</label>
+                                </div>
+                            }
+                            else if(TempData.Peek("AName") ==null && TempData.Peek("ExeID") == null && TempData.Peek("UserID") == null)
+                            {
+                                <div class="dropdown">
+                                    <button type="button" class="btn btn-outline-info"><span class="glyphicon glyphicon-user">SignUp</span></button>
+                                    <div class="dropdown-content">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Executive" asp-action="Register">Executive</a>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="Register">Customer</a>
+                                    </div>
+                                </div>    
+                            }
+                        </li>
+                        <li class="nav-item" style="float:right;">
+                            @if (TempData.Peek("ExeID") != null)
+                            {
+                                <div class="dropdown">
+                                    <button type="button" class="btn btn-default" aria-label="Right Align">
+                                        <span class="glyphicon glyphicon-user">Menu</span>
+                                    </button>
+                                    <div class="dropdown-content">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Executive" asp-action="Profile">My Profile</a>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Executive" asp-action="EditExecutiveInfo">Change Profile</a>
+                                    </div>
+                                </div>
+                            }
+                            else if (TempData.Peek("UserID") != null)
+                            {
+                                <div class="dropdown">
+                                    <button type="button" class="btn btn-default" aria-label="Right Align">
+                                        <span class="glyphicon glyphicon-user">Menu</span>
+                                    </button>
+                                    <div class="dropdown-content">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="Profile">My Profile</a>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="EditCustomerInfo">Change Profile</a>
+                                    </div>
+                                </div>
+                            }
+                        </li>
+                        <li class="nav-item" style="float:right;">
+                            @if (TempData.Peek("ExeID") != null)
+                            {
+                                  <a class="nav-link btn btn-outline-info text-dark" asp-area="" asp-controller="Executive" asp-action="Logout">SignOut</a>
+                            }
+                            else if (TempData.Peek("UserID") != null)
+                            {
+                                 <a class="nav-link btn btn-outline-info text-dark" asp-area="" asp-controller="Customer" asp-action="Logout">SignOut</a>
+                            }
+                            else if (TempData.Peek("AUName") != null)
+                            {
+                                 <a class="nav-link btn btn-outline-info text-dark" asp-area="" asp-controller="Admin" asp-action="Logout">SignOut</a>
+                            }
+                            else
+                            {
+                                <a class="nav-link btn btn-outline-primary text-dark" asp-area="" asp-controller="User" asp-action="Login">SignIn</a>
+                            }
+                        </li>
+                    </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+   
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

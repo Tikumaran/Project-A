@@ -1,0 +1,68 @@
+﻿@model DeliveryBookingProject.Models.DeliveryBooking
+
+@{
+    ViewData["Title"] = "BookingDetailByOrderId";
+}
+
+<h1>Order Detail</h1>
+
+<div>
+    <hr />
+    @if (Model != null)
+    {
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.CustomerId)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.CustomerId)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.OrderDate)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.OrderDate)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.PickUpDateTime)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.PickUpDateTime)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.BookingStatus)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.BookingStatus)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Message)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Message)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ResMessage)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ResMessage)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.WeightOfPackage)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.WeightOfPackage)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Price)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Price)
+            </dd>
+        </dl>
+    }
+    else
+    {
+        <h4>No More Details</h4>
+    }
+    </div>

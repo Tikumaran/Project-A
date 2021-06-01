@@ -1,0 +1,81 @@
+﻿@model IEnumerable<DeliveryBookingProject.Models.DeliveryExecutive>
+
+@{
+    ViewData["Title"] = "ExecutiveRequests";
+}
+
+<h1>Executive Requests</h1>
+
+@if (Model != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ExecutiveId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ExecutiveName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Age)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Phone)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Address)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.City)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IsVerified)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        @using (Html.BeginForm("EditExecutiveRequest", "Admin", new { Id = item.ExecutiveId }, FormMethod.Post))
+                        {
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ExecutiveId)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ExecutiveName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Age)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Phone)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Address)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.City)
+                            </td>
+                            <td>
+                                <select class="form-control" name="IsVerified">
+                                    <option>@Html.ValueFor(modelItem => item.IsVerified)</option>
+                                    <option>Verified</option>
+                                    <option>Rejected</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="submit" name="Update" value="Update" />
+                            </td>
+                         }
+                    </tr>
+                 }
+        </tbody>
+    </table>
+}
+else
+{
+    <h4>No More Customer's</h4>
+}

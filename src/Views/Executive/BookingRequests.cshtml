@@ -1,0 +1,75 @@
+﻿@model IEnumerable<DeliveryBookingProject.Models.DeliveryBooking>
+@{
+    ViewData["Title"] = "BookingRequests";
+}
+
+<h1>Booking Requests</h1>
+@if (Model != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.OrderId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CustomerId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OrderDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PickUpDateTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BookingStatus)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Message)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.WeightOfPackage)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    @using (Html.BeginForm("BookingDetailById", "Executive", new { Id = item.OrderId }))
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OrderId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CustomerId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OrderDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PickUpDateTime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BookingStatus)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Message)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.WeightOfPackage)
+                        </td>
+                        <td>
+                            <input type="submit" class="btn btn-primary" value="Select" />
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <h4>No More Booking Requests For You</h4>
+}

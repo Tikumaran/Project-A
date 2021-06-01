@@ -1,0 +1,57 @@
+﻿@model DeliveryBookingProject.Models.User
+
+@{
+    Layout = "_Layout";
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    <script src="~/js/site.js"></script>
+    <style src="~/css/site.css"></style>
+</head>
+<body>
+    <h1>Sign In</h1>
+    <hr />
+    <br />
+    <div class="row">
+        <div class="col-md-4">
+            <form action="Login" method="post">
+                <table>
+                    <tr>
+                        <th>
+                            @Html.LabelFor(m => m.UserName, new { @class = "form-control" })
+                        </th>
+                        <td>
+                            @Html.EditorFor(m => m.UserName, new { @class = "form-control" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            @Html.LabelFor(m => m.Password, new { @class = "form-control" })
+                        </th>
+                        <td>
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            @Html.LabelFor(m => m.UserType, new { @class = "form-control" })
+                        </th>
+                        <td>
+                            Customer:  @Html.RadioButtonFor(m => m.UserType, "Customer", new { @class = "form-control radio-inline" })
+                            Executive: @Html.RadioButtonFor(m => m.UserType, "Executive", new { @class = "form-control radio-inline" })
+                        </td>
+                    </tr>
+                </table>
+                <div class="form-group">
+                    <input type="submit" value="SignIn" class="btn btn-primary" />
+                    <button type="reset" value="Reset" class="btn btn-primary">ReSet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

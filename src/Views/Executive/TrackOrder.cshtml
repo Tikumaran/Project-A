@@ -1,0 +1,97 @@
+﻿@model IEnumerable<DeliveryBookingProject.Models.DeliveryBooking>
+
+@{
+    ViewData["Title"] = "TrackOrder";
+}
+
+<h1>Track Order</h1>
+@if (Model != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.CustomerId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OrderDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PickUpDateTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BookingStatus)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.WeightOfPackage)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th>
+                    @Html.DisplayName("Days to Go")
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CustomerId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrderDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PickUpDateTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BookingStatus)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.WeightOfPackage)
+                    </td>
+                    <td>
+                        Rs. @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @if (item.PickUpDateTime >= DateTime.Today && item.BookingStatus == "ExecutiveAccept")
+                        {
+                            int PicDate = item.PickUpDateTime.Day;//6/31
+                            int todaydate = DateTime.Today.Day;//30//1
+                            int month = DateTime.Today.Month;//4//6
+                            int Days = todaydate - PicDate;//30-6=24//-30
+                            if (month % 2 == 0 && month != 2)
+                            {
+                                Days = 30 - Days;
+                            }
+                            else if (month % 2 == 1 && month != 2)
+                            {
+                                Days = 31 - (Days);
+                            }
+                            else
+                            {
+                                Days = 28 - (Days);
+                            }
+                            @if (Days > 0)
+                            {
+                                <label>@Days.ToString() Days More</label>
+                            }
+                            else
+                            {
+                                <label>No More Days</label>
+                            }
+
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <h4>No More Oreder Pending For You</h4>
+}
+

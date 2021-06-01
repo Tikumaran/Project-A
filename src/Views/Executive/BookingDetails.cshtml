@@ -1,0 +1,89 @@
+﻿@model IEnumerable<DeliveryBookingProject.Models.DeliveryBooking>
+
+@{
+    ViewData["Title"] = "BookingDetails";
+}
+
+<h1>BookingDetails</h1>
+@if (Model != null)
+{
+    double total = 0;
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.CustomerId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OrderDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PickUpDateTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BookingStatus)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.WeightOfPackage)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    @using (Html.BeginForm("BookingDetailByOrderId", "Executive", new { Id = item.OrderId }))
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CustomerId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OrderDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PickUpDateTime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BookingStatus)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.WeightOfPackage)
+                        </td>
+                        <td>
+                            Rs. @Html.DisplayFor(modelItem => item.Price)
+                        </td>
+                        <td>
+                            <input type="submit" name="Details" value="Details" />
+                        </td>
+                        @if (item.BookingStatus == "PackagePickUped")
+                        {
+                            total = total + item.Price;
+                        }
+                    }
+                </tr>
+            }
+            <tr></tr>
+            <tr>
+                @if (total != 0)
+                {
+                    <th>
+                        <label>Total Collectable Cash:</label>
+                    </th>
+                    <td>
+                        <label>Rs.@total</label>
+                    </td>
+                }
+            </tr>
+        </tbody>
+    </table>
+}
+else
+{
+    <h4>No More Order From You</h4>
+}

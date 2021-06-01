@@ -1,0 +1,53 @@
+﻿@model DeliveryBookingProject.Models.DeliveryBooking
+
+@{
+    ViewData["Title"] = "AddBooking";
+}
+
+<h1>AddBooking</h1>
+
+<h4>DeliveryBooking</h4>
+<hr />
+<script src="~/js/site.js"></script>
+<style src="~/css/site.css"></style>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddBooking">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="PickUpDateTime" class="control-label"></label>
+                <input asp-for="PickUpDateTime" class="form-control" />
+                <span asp-validation-for="PickUpDateTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WeightOfPackage" class="control-label"></label>
+                <input asp-for="WeightOfPackage" type="number" id="Kg" class="form-control" />
+                <span asp-validation-for="WeightOfPackage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Message" class="control-label"></label>
+                <textarea asp-for="Message" class="form-control" required></textarea>
+                <span asp-validation-for="Message" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" type="number" class="form-control" id="Price" readonly /><br />
+                <button type="button" class="btn btn-primary" onclick="calculate();">Calculate Price</button>
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="hidden" asp-for="ExecutiveId" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Submit Booking" class="btn btn-primary" />
+            </div>
+            <div class="form-group">
+                @Html.ActionLink("Cancel", "BookingExecutive", "Customer",null,new {@class= "btn btn-primary btn-large" })
+            </div>
+        </form>
+    </div>
+</div>
+ 
+@*@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}*@
