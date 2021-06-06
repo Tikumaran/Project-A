@@ -156,6 +156,7 @@ namespace DeliveryBookingProject.Controllers
                         _repoBooking.EditInfo(item);
                     }
                 }
+                bookings = _repoBooking.GetAllInfo().Where(a => a.ExecutiveId == Exec_id && a.BookingStatus == "CustomerRequest").ToList();
                 if (bookings.Count() != 0)
                 {
                     return View(bookings);

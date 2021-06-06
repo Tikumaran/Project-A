@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\tikum\\Desktop\\Final Project\\Training-Final-Project\\src\\DeliveryBookingSolution\\DeliveryBookingProject\\DeliveryBookingProject.csproj": {}
+    "C:\\Users\\tikum\\Desktop\\Softura training\\Project A\\src\\DeliveryBookingProject\\DeliveryBookingProject.csproj": {}
   },
   "projects": {
-    "C:\\Users\\tikum\\Desktop\\Final Project\\Training-Final-Project\\src\\DeliveryBookingSolution\\DeliveryBookingProject\\DeliveryBookingProject.csproj": {
+    "C:\\Users\\tikum\\Desktop\\Softura training\\Project A\\src\\DeliveryBookingProject\\DeliveryBookingProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\tikum\\Desktop\\Final Project\\Training-Final-Project\\src\\DeliveryBookingSolution\\DeliveryBookingProject\\DeliveryBookingProject.csproj",
+        "projectUniqueName": "C:\\Users\\tikum\\Desktop\\Softura training\\Project A\\src\\DeliveryBookingProject\\DeliveryBookingProject.csproj",
         "projectName": "DeliveryBookingProject",
-        "projectPath": "C:\\Users\\tikum\\Desktop\\Final Project\\Training-Final-Project\\src\\DeliveryBookingSolution\\DeliveryBookingProject\\DeliveryBookingProject.csproj",
+        "projectPath": "C:\\Users\\tikum\\Desktop\\Softura training\\Project A\\src\\DeliveryBookingProject\\DeliveryBookingProject.csproj",
         "packagesPath": "C:\\Users\\tikum\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\tikum\\Desktop\\Final Project\\Training-Final-Project\\src\\DeliveryBookingSolution\\DeliveryBookingProject\\obj\\",
+        "outputPath": "C:\\Users\\tikum\\Desktop\\Softura training\\Project A\\src\\DeliveryBookingProject\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\tikum\\AppData\\Roaming\\NuGet\\NuGet.Config",
