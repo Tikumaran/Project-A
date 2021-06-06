@@ -36,26 +36,27 @@ namespace DeliveryBookingProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                customer.IsVerified = "Requested";
-                _repoCustomer.AddInfo(customer);
-                TempData["UserName"] = customer.UserName;
-                return RedirectToAction("Login", "User");
+                var record = _repoCustomer.GetByUserName(customer.UserName);
+                if (record == null)
+                {
+                    customer.IsVerified = "Requested";
+                    customer.City = customer.City.ToLower();
+                    _repoCustomer.AddInfo(customer);
+                    TempData["UserName"] = customer.UserName;
+                    return RedirectToAction("Login", "User");
+                }
+                else
+                {
+                    return RedirectToAction("Error");
+                }
             }
             else
             {
                 return View(customer);
             }
         }
-        [AcceptVerbs("GET", "POST")]
-        public IActionResult VerifyUserName(string Username)
-        {
-            if (_repoCustomer.GetByUserName(Username) !=null)
-            {
-                return Json($"UserName {Username} is already in use.");
-            }
-
-            return Json(true);
-        }
+        
+        
         public IActionResult CustomerLogin(User user)
         {
             string UserName = user.UserName;
@@ -73,15 +74,15 @@ namespace DeliveryBookingProject.Controllers
                 }
                 else
                 {
-                    //alert Your Account was Not Verified
-                    return RedirectToAction("Login", "User",new { user=user});
+                    TempData["ErrMsg"] = "Your Account was Not Verified";
+                    return RedirectToAction("Error", "User");
                 }
             }
             else
             {
                 //alert Incorrect UserName Or Password
-                user.Password = null;
-                return RedirectToAction("Login", "User", new { user = user });
+                TempData["ErrMsg"] = "Incorrect UserName or Password";
+                return RedirectToAction("Error", "User");
             }
         }
         public ActionResult Home()
@@ -130,7 +131,7 @@ namespace DeliveryBookingProject.Controllers
         {
             try
             { 
-                if (customer != null)
+                if (ModelState.IsValid)
                 {
                     _repoCustomer.EditInfo(customer);
                     return RedirectToAction("Profile");
@@ -218,17 +219,12 @@ namespace DeliveryBookingProject.Controllers
             try
             {
                 int Cust_id = Convert.ToInt32(TempData.Peek("UserID"));
-                List<DeliveryBooking> bookings = _repoBooking.GetAllInfo().Where(a => a.CustomerId == Cust_id && a.BookingStatus == "ExecutiveAccept" || a.BookingStatus == "PackagePickUped" || a.BookingStatus == "ExecutiveReject" || a.BookingStatus == "PackageNotPickUped").ToList();
+                List<DeliveryBooking> bookings = _repoBooking.GetAllInfo().Where(a => a.CustomerId == Cust_id ).ToList();
                 foreach (var item in bookings)
                 {
-                    if (item.PickUpDateTime >= DateTime.Now && item.BookingStatus == "ExecutiveAccept")
+                    if (item.PickUpDateTime <= DateTime.Now && item.BookingStatus == "ExecutiveAccept")
                     {
                         item.BookingStatus = "PackagePickUped";
-                        _repoBooking.EditInfo(item);
-                    }
-                    else if (item.PickUpDateTime < DateTime.Now && item.BookingStatus == "ExecutiveAccept")
-                    {
-                        item.BookingStatus = "PackageNotPickUped";
                         _repoBooking.EditInfo(item);
                     }
                 }
@@ -255,6 +251,10 @@ namespace DeliveryBookingProject.Controllers
                 TempData.Remove(key);
             }
             return RedirectToAction("Index", "Home");
+        }
+        public ActionResult Error()
+        {
+            return View();
         }
         /*// GET: CustomerController/Delete/5
         public ActionResult DeleteCustomerInfo()

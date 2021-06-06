@@ -1,57 +1,44 @@
 ﻿@model DeliveryBookingProject.Models.User
 
 @{
-    Layout = "_Layout";
+    ViewData["Title"] = "Login";
 }
-<!DOCTYPE html>
+@if (Model.UserName != null && Model.Password != null) { 
+    <script>
+        alert("Invalid UserName or Password and also Check Admin Verified Your Account or Not")
+    </script>
+}
+<h1>Login</h1>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Login</title>
-    <script src="~/js/site.js"></script>
-    <style src="~/css/site.css"></style>
-</head>
-<body>
-    <h1>Sign In</h1>
-    <hr />
-    <br />
-    <div class="row">
-        <div class="col-md-4">
-            <form action="Login" method="post">
-                <table>
-                    <tr>
-                        <th>
-                            @Html.LabelFor(m => m.UserName, new { @class = "form-control" })
-                        </th>
-                        <td>
-                            @Html.EditorFor(m => m.UserName, new { @class = "form-control" })
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            @Html.LabelFor(m => m.Password, new { @class = "form-control" })
-                        </th>
-                        <td>
-                            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            @Html.LabelFor(m => m.UserType, new { @class = "form-control" })
-                        </th>
-                        <td>
-                            Customer:  @Html.RadioButtonFor(m => m.UserType, "Customer", new { @class = "form-control radio-inline" })
-                            Executive: @Html.RadioButtonFor(m => m.UserType, "Executive", new { @class = "form-control radio-inline" })
-                        </td>
-                    </tr>
-                </table>
-                <div class="form-group">
-                    <input type="submit" value="SignIn" class="btn btn-primary" />
-                    <button type="reset" value="Reset" class="btn btn-primary">ReSet</button>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Login">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="UserName" class="control-label"></label>
+                <input asp-for="UserName" class="form-control" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserType" class="control-label"></label>
+                <div class="col-md-10">
+                    <b>Customer</b>&nbsp;&nbsp;<input type="radio" asp-for="UserType" value="Customer" />&nbsp;
+                    <b>Executive</b>&nbsp;&nbsp;<input type="radio" asp-for="UserType" value="Executive" />&nbsp;
+                    <span asp-validation-for="UserType" class="text-danger"></span>
                 </div>
-            </form>
-        </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="SignIn" class="btn btn-primary" />
+                <input type="reset" value="Reset" class="btn btn-primary" />
+            </div>
+        </form>
     </div>
-</body>
-</html>
+</div>
+
+

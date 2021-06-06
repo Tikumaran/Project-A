@@ -9,6 +9,7 @@ namespace DeliveryBookingProject.Models
 {
     public class User
     {
+        [Key]
         [Required(ErrorMessage = "Please Enter User Name")]
         [Display(Name = "User Name")]
         [Remote(action: "VerifyUserName", controller: "Customer")]

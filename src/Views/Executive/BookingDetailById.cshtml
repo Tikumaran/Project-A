@@ -7,10 +7,10 @@
     Layout = "_Layout";
 }
 <script src="~/js/site.js"></script>
-<h1>BookingDetailById</h1>
+<link rel="stylesheet" href="~/css/site.css" />
+<h1>Request Information</h1>
 
 <div>
-    <h4>DeliveryBooking</h4>
     <hr />
     @if(Model!= null)
     {
@@ -36,12 +36,6 @@
                     @Html.TempData.Peek("Address").ToString()
                     @Html.TempData.Peek("City").ToString()
                 </dd>
-                @*<dt class="col-sm-2">
-                        @Html.DisplayName("Location:");
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.RouteLink("","Location")
-                    </dd>*@
                 <dt class="col-sm-2">
                     @Html.DisplayNameFor(model => model.BookingStatus)
                 </dt>

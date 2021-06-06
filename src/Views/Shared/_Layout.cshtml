@@ -50,8 +50,8 @@
                                 <div class="dropdown">
                                     <button class="dropbtn">User Requests</button>
                                     <div class="dropdown-content">
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="CustomerRequests">Customer Requests</a>
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="ExecutiveRequests">Executive Requests</a>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="CustomerRequests">Customers</a>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="ExecutiveRequests">Executives</a>
                                     </div>
                                 </div>
                             }
@@ -107,7 +107,7 @@
                                     <label>@TempData.Peek("Cust_Name")</label>
                                 </div>
                             }
-                            else if(TempData.Peek("AName") ==null && TempData.Peek("ExeID") == null && TempData.Peek("UserID") == null)
+                            else if(TempData.Peek("AUName") ==null && TempData.Peek("ExeID") == null && TempData.Peek("UserID") == null)
                             {
                                 <div class="dropdown">
                                     <button type="button" class="btn btn-outline-info"><span class="glyphicon glyphicon-user">SignUp</span></button>

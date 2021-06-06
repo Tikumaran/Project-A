@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "BookingDetailById";
 }
-
+<link rel="stylesheet" href="~/css/site.css" />
 <h1>Booking Details</h1>
 
 <div>
@@ -41,12 +41,15 @@
             <dd class="col-sm-10">
                 @Html.DisplayFor(model => model.Message)
             </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.ResMessage)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.ResMessage)
-            </dd>
+            @if (Model.ResMessage != null)
+            {
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.ResMessage)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.ResMessage)
+                </dd>
+            }
             <dt class="col-sm-2">
                 @Html.DisplayNameFor(model => model.WeightOfPackage)
             </dt>
@@ -60,9 +63,9 @@
                 @Html.DisplayFor(model => model.Price)
             </dd>
         </dl>
-     }
-     else
-     {
+    }
+    else
+    {
         <h4>No More Details</h4>
-     }
+    }
 </div>

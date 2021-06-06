@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "tpxYMMSGP0hiG3JzJsz+gK4BkOqtnJKdLv3IH1QSva6WpnnwhjHsaLZov+3wNXBub9NJ44tthHdDIvKfckddEg==",
+  "dgSpecHash": "P8i0VrxBFkO/0JbSffYcsZmkVfMGl5EwUxekoUGMuzOTe06VA7eXPX5e1BSx7fG1OsmgXLO/f6szM/OQCV3SMQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\tikum\\Desktop\\Final Project\\Training-Final-Project\\src\\DeliveryBookingSolution\\DeliveryBookingProject\\DeliveryBookingProject.csproj",
   "expectedPackageFiles": [
@@ -161,7 +161,9 @@
     "C:\\Users\\tikum\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\tikum\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
     "C:\\Users\\tikum\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
-    "C:\\Users\\tikum\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512"
+    "C:\\Users\\tikum\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512",
+    "C:\\Users\\tikum\\.nuget\\packages\\xunit.abstractions\\2.0.3\\xunit.abstractions.2.0.3.nupkg.sha512",
+    "C:\\Users\\tikum\\.nuget\\packages\\xunit.extensibility.core\\2.4.1\\xunit.extensibility.core.2.4.1.nupkg.sha512"
   ],
   "logs": []
 }

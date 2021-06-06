@@ -19,21 +19,23 @@ namespace DeliveryBookingProject.Controllers
             _repoBooking = repoBooking;
             _logger = logger;
         }
-        [HttpGet]
-        public ActionResult AddBooking(int Id)
+        [HttpGet("{id}/{Name}")]
+        public ActionResult AddBooking(int Id,string Name)
         {
             DeliveryBooking delivery = new DeliveryBooking();
             delivery.ExecutiveId = Id;
+            TempData["Exce_Name"] = Name;
             return View(delivery);
         }
         public double CalculatePrice(double kg)
         {
-            double PricePerKg = kg * 100, petrol = 200.0,gst =  (2.5 / 100);
+            double PricePerKg = kg * 100, petrol = 200.0,gst =  0.02 ;
             double price = PricePerKg + petrol;
-            price = price * gst;
+            gst = price * gst;
+            price = price + gst;
             return price;
         }
-        [HttpPost]
+        [HttpPost("{id}/{Name}")]
         public ActionResult AddBooking(DeliveryBooking booking)
         {
             try

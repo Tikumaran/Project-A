@@ -35,26 +35,26 @@ namespace DeliveryBookingProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                executive.IsVerified = "Requested";
-                _repoExecutive.AddInfo(executive);
-                TempData["UserName"] = executive.UserName;
-                return RedirectToAction("Login", "User");
+                var record = _repoExecutive.GetByUserName(executive.UserName);
+                if (record == null)
+                {
+                    executive.IsVerified = "Requested";
+                    executive.City=executive.City.ToLower();
+                    _repoExecutive.AddInfo(executive);
+                    TempData["UserName"] = executive.UserName;
+                    return RedirectToAction("Login", "User");
+                }
+                else
+                {
+                    return RedirectToAction("Error");
+                }
             }
             else
             {
                 return View(executive);
             }
         }
-        [AcceptVerbs("GET", "POST")]
-        public IActionResult VerifyUserName(string Username)
-        {
-            if (_repoExecutive.GetByUserName(Username) != null)
-            {
-                return Json($"UserName {Username} is already in use.");
-            }
-
-            return Json(true);
-        }
+       
         public IActionResult ExecutiveLogin(User user)
         {
             string UserName = user.UserName;
@@ -70,15 +70,15 @@ namespace DeliveryBookingProject.Controllers
                 }
                 else
                 {
-                    //alert Your Account was Not Verified
-                    return RedirectToAction("Login", "User", new { user = user });
+                    TempData["ErrMsg"] = "Your Account was Not Verified";
+                    return RedirectToAction("Error", "User");
                 }
             }
             else
             {
                 //alert Incorrect UserName Or Password
-                user.Password = null;
-                return RedirectToAction("Login", "User", new { user = user });
+                TempData["ErrMsg"] = "Incorrect UserName or Password";
+                return RedirectToAction("Error", "User");
             }
         }
         public ActionResult Home()
@@ -125,7 +125,7 @@ namespace DeliveryBookingProject.Controllers
         {
             try
             {
-                if (executive != null)
+                if (ModelState.IsValid)
                 {
                     _repoExecutive.EditInfo(executive);
                     return RedirectToAction("Profile");
@@ -243,7 +243,7 @@ namespace DeliveryBookingProject.Controllers
             {
                 _logger.LogDebug(e.Message);
             }
-            return NoContent();
+            return View();
         }
         // GET: CustomerController/Details/5
         public ActionResult BookingDetails()
@@ -251,17 +251,12 @@ namespace DeliveryBookingProject.Controllers
             try
             {
                 int Exec_id = Convert.ToInt32(TempData.Peek("ExeID"));
-                List<DeliveryBooking> bookings = _repoBooking.GetAllInfo().Where(a => a.ExecutiveId == Exec_id && a.BookingStatus == "ExecutiveAccept" || a.BookingStatus == "PackagePickUped" || a.BookingStatus == "ExecutiveReject" || a.BookingStatus == "PackageNotPickUped").ToList();
+                List<DeliveryBooking> bookings = _repoBooking.GetAllInfo().Where(a => a.ExecutiveId == Exec_id).ToList();
                 foreach (var item in bookings)
                 {
-                    if (item.PickUpDateTime >= DateTime.Now && item.BookingStatus == "ExecutiveAccept")
+                    if (item.PickUpDateTime < DateTime.Now && item.BookingStatus == "ExecutiveAccept")
                     {
                         item.BookingStatus = "PackagePickUped";
-                        _repoBooking.EditInfo(item);
-                    }
-                    else if(item.PickUpDateTime < DateTime.Now && item.BookingStatus == "ExecutiveAccept")
-                    {
-                        item.BookingStatus = "PackageNotPickUped";
                         _repoBooking.EditInfo(item);
                     }
                 }
@@ -307,6 +302,10 @@ namespace DeliveryBookingProject.Controllers
                 TempData.Remove(key);
             }
             return RedirectToAction("Index","Home");
+        }
+        public ActionResult Error()
+        {
+            return View();
         }
         /*// GET: ExecutiveController/Delete/5
         public ActionResult DeleteExecutiveInfo()

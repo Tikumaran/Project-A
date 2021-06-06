@@ -10,14 +10,13 @@ namespace DeliveryBookingProject.Models
     public class DeliveryExecutive
     {
         [Key]
-        [Display(Name = "Customer ID")]
+        [Display(Name = "Executive ID")]
         public int ExecutiveId { get; set; }
         [Required(ErrorMessage = "Please Enter Executive Name")]
         [Display(Name = "Executive Name")]
         public string ExecutiveName { get; set; }
         [Required(ErrorMessage = "Please Enter User Name")]
         [Display(Name = "User Name")]
-        [Remote(action: "VerifyUserName", controller: "Customer")]
         public string UserName { get; set; }
         [Required(ErrorMessage = "Please Enter Password")]
         [Display(Name = "Password")]
@@ -26,11 +25,11 @@ namespace DeliveryBookingProject.Models
         [Required(ErrorMessage = "Required Age")]
         [Display(Name = "Age")]
         public int Age { get; set; }
-        [Required(ErrorMessage = "Please Enter Phone Number")]
-        [Display(Name = "Mobile Number")]
+        [Required(ErrorMessage = "Required phone number")]
+        [Display(Name = "Mobile Phone")]
         [DataType(DataType.PhoneNumber)]
-        [Phone(ErrorMessage = "Mobile Number Should Be in 10 Numbers")]
-        public long Phone { get; set; }
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid phone number")]
+        public string Phone { get; set; }
         [Required(ErrorMessage = "Please Enter Address")]
         [Display(Name = "Detailed Address")]
         public string Address { get; set; }

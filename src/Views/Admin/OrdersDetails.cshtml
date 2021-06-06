@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "OrdersDetails";
 }
-
+<link rel="stylesheet" href="~/css/site.css" />
 <h1>Orders Details</h1>
 
 @if (Model != null)
@@ -60,7 +60,7 @@
                             Rs. @Html.DisplayFor(modelItem => item.Price)
                         </td>
                         <td>
-                            <input type="submit" name="Details" value="Details" />
+                            <input type="submit" class="btn btn-success" name="Details" value="Details" />
                         </td>
                         @if (item.BookingStatus == "PackagePickUped")
                         {

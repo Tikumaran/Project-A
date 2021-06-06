@@ -5,13 +5,12 @@
 function calculate() {
     var kg = document.getElementById("Kg").value;
     var PricePerKg = 100, petrol = 200, gst = (2 / 100), price = 0;
-    price = (kg * PricePerKg) + petrol;
+    PricePerKg = kg * PricePerKg;
+    price = PricePerKg + petrol;
     gst = price * gst;
     price = price + gst;
     document.getElementById("Price").value = price;
+    
 };
-document.onload("Logout")
-{
-    alert("Are you Sure You Want Logout");
-};
+
 

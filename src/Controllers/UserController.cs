@@ -47,21 +47,36 @@ namespace DeliveryBookingProject.Controllers
         [HttpPost]
         public ActionResult Login(User user)
         {
-            if (user.UserName == "Admin")
+            if (ModelState.IsValid)
             {
-                return RedirectToAction("AdminLogin", "Admin", user);
+                if (user.UserName == "Apple" && user.Password == "Apple")
+                {
+                    return RedirectToAction("AdminLogin", "Admin", user);
+                }
+                else if (user.UserName != "Apple" && user.Password != "Apple" && user.UserType == "Customer")
+                {
+                    //return(ActionResult)_customer.CustomerLogin(user);
+                    return RedirectToAction("CustomerLogin", "Customer", user);
+                }
+                else if (user.UserName != "Apple" && user.Password != "Apple" && user.UserType == "Executive")
+                {
+                    //return(ActionResult)_customer.CustomerLogin(user);
+                    return RedirectToAction("ExecutiveLogin", "Executive", user);
+                }
+                else
+                {
+                    TempData["ErrMsg"] = "Invalid UserName or Password";
+                    return RedirectToAction("Error","User");
+                }
             }
-            else if (user.UserName != "Admin" && user.UserType == "Customer")
+            else
             {
-                //return(ActionResult)_customer.CustomerLogin(user);
-                return RedirectToAction("CustomerLogin", "Customer", user);
+                return View(user);
             }
-            else if (user.UserName != "Admin" && user.UserType == "Executive")
-            {
-                //return(ActionResult)_customer.CustomerLogin(user);
-                return RedirectToAction("ExecutiveLogin", "Executive", user);
-            }
-            return View();
         }        
+        public ActionResult Error()
+        {
+            return View();
+        }
     }
 }

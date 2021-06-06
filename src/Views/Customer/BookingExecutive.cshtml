@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "BookingExecutive";
 }
-
+<link rel="stylesheet" href="~/css/site.css" />
 <h1>Booking Executive</h1>
 @if (Model != null)
 {
@@ -30,27 +30,27 @@
         <tbody>
             @foreach (var item in Model)
             {
-            <tr>
-                @using (Html.BeginForm("AddBooking", "DeliveryBook", new { Id = item.ExecutiveId }))
-                {
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ExecutiveName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Phone)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Address)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.City)
-                    </td>
-                    <td>
-                        <input type="submit" class="btn btn-primary" value="Select" />
-                    </td>
-                }
-            </tr>
-             }
+                <tr>
+                    @using (Html.BeginForm("AddBooking", "DeliveryBook", new { Id = item.ExecutiveId, Name = item.ExecutiveName }, FormMethod.Get))
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ExecutiveName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Phone)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Address)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.City)
+                        </td>
+                        <td>
+                            <input type="submit" class="btn btn-primary" value="Select" />
+                        </td>
+                    }
+                </tr>
+            }
         </tbody>
     </table>
 }

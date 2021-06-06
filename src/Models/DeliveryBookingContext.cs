@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DeliveryBookingProject.Models;
 
 namespace DeliveryBookingProject.Models
 {
@@ -23,5 +24,7 @@ namespace DeliveryBookingProject.Models
         {
 
         }
+
+        public DbSet<DeliveryBookingProject.Models.User> User { get; set; }
     }
 }

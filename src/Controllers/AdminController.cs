@@ -15,11 +15,13 @@ namespace DeliveryBookingProject.Controllers
         private ILogger<AdminController> _logger;
         private IRepo<Customer> _repoCustomer;
         private IRepo<DeliveryExecutive> _repoExecutive;
-        public AdminController(ILogger<AdminController> logger, IRepo<Customer> repoCustomer, IRepo<DeliveryExecutive> repoExecutive)
+        private IRepo<DeliveryBooking> _repoDelivery;
+        public AdminController(ILogger<AdminController> logger, IRepo<Customer> repoCustomer, IRepo<DeliveryExecutive> repoExecutive,IRepo<DeliveryBooking> repoDelivery)
         {
             _logger = logger;
             _repoCustomer = repoCustomer;
             _repoExecutive = repoExecutive;
+            _repoDelivery = repoDelivery;
         }
 
         [HttpGet]
@@ -29,12 +31,13 @@ namespace DeliveryBookingProject.Controllers
             {
                 if (user.UserName == "Apple" && user.Password == "Apple")
                 {
-                    TempData["AName"] = user.UserName;
+                    TempData["AUName"] = user.UserName;
                     return RedirectToAction("Home");
                 }
                 else
                 {
-                    return RedirectToAction("Login", "User");
+                    TempData["ErrMsg"] = "Incorrect UserName or Password";
+                    return RedirectToAction("Error", "User");
                 }
             }
             catch (Exception e)
@@ -116,12 +119,11 @@ namespace DeliveryBookingProject.Controllers
             return View();
         }
         // GET: AdminController/Details/5
-        public ActionResult CustomerProfile()
+        public ActionResult CustomerProfile(int Id)
         {
             try
             {
-                int id = Convert.ToInt32(TempData.Peek("UserID"));
-                Customer customer = _repoCustomer.GetById(id);
+                Customer customer = _repoCustomer.GetById(Id);
                 if (customer != null)
                     return View(customer);
                 return View();
@@ -132,12 +134,11 @@ namespace DeliveryBookingProject.Controllers
             }
             return View();
         }
-        public ActionResult ExecutiveProfile()
+        public ActionResult ExecutiveProfile(int Id)
         {
             try
             {
-                int id = Convert.ToInt32(TempData.Peek("UserID"));
-                DeliveryExecutive executive = _repoExecutive.GetById(id);
+                DeliveryExecutive executive = _repoExecutive.GetById(Id);
                 if (executive != null)
                     return View(executive);
                 return View();
@@ -190,6 +191,54 @@ namespace DeliveryBookingProject.Controllers
                 {
                     //alert there is no executive
                     return NoContent();
+                }
+            }
+            catch (Exception e)
+            {
+                _logger.LogDebug(e.Message);
+            }
+            return View();
+        }
+        public ActionResult OrdersDetails()
+        {
+            try
+            {
+                List<DeliveryBooking> bookings = _repoDelivery.GetAllInfo().ToList();
+                foreach (var item in bookings)
+                {
+                    if (item.PickUpDateTime <= DateTime.Now && item.BookingStatus == "ExecutiveAccept")
+                    {
+                        item.BookingStatus = "PackagePickUped";
+                        _repoDelivery.EditInfo(item);
+                    }
+                }
+                if (bookings.Count() != 0)
+                {
+                    return View(bookings);
+                }
+                else
+                {
+                    return View();
+                }
+            }
+            catch (Exception e)
+            {
+                _logger.LogDebug(e.Message);
+            }
+            return View();
+        }
+        public ActionResult OrdersDetailsById(int Id)
+        {
+            try
+            {
+                DeliveryBooking delivery = _repoDelivery.GetById(Id);
+                if (delivery != null)
+                {
+                    return View(delivery);
+                }
+                else
+                {
+                    return View(delivery);
                 }
             }
             catch (Exception e)

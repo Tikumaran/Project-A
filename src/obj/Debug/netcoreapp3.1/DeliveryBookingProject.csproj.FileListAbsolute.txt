@@ -154,7 +154,6 @@ C:\Users\tikum\Desktop\Softura training\Final Project\Training-Final-Project\Del
 C:\Users\tikum\Desktop\Softura training\Final Project\Training-Final-Project\DeliveryBookingSolution\DeliveryBookingProject\obj\Debug\netcoreapp3.1\Razor\Views\Executive\Register.cshtml.g.cs
 C:\Users\tikum\Desktop\Softura training\Final Project\Training-Final-Project\DeliveryBookingSolution\DeliveryBookingProject\obj\Debug\netcoreapp3.1\Razor\Views\Customer\Home.cshtml.g.cs
 C:\Users\tikum\Desktop\Softura training\Final Project\Training-Final-Project\DeliveryBookingSolution\DeliveryBookingProject\obj\Debug\netcoreapp3.1\Razor\Views\Executive\Home.cshtml.g.cs
-C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\obj\Debug\netcoreapp3.1\DeliveryBookingProject.genruntimeconfig.cache
 C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\bin\Debug\netcoreapp3.1\appsettings.Development.json
 C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\bin\Debug\netcoreapp3.1\appsettings.json
 C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\bin\Debug\netcoreapp3.1\DeliveryBookingProject.exe
@@ -298,21 +297,39 @@ C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingS
 C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\obj\Debug\netcoreapp3.1\Razor\Views\Admin\ExecutiveDetails.cshtml.g.cs
 C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\obj\Debug\netcoreapp3.1\Razor\Views\Admin\ExecutiveProfile.cshtml.g.cs
 C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\obj\Debug\netcoreapp3.1\Razor\Views\Admin\ExecutiveRequests.cshtml.g.cs
+C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\obj\Debug\netcoreapp3.1\Razor\Views\Admin\Home.cshtml.g.cs
+C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\obj\Debug\netcoreapp3.1\Razor\Views\Admin\OrdersDetails.cshtml.g.cs
+C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\obj\Debug\netcoreapp3.1\Razor\Views\Admin\OrdersDetailsById.cshtml.g.cs
+C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\obj\Debug\netcoreapp3.1\Razor\Views\Admin\View.cshtml.g.cs
 C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\obj\Debug\netcoreapp3.1\Razor\Views\Customer\BookingDetailById.cshtml.g.cs
+C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\obj\Debug\netcoreapp3.1\Razor\Views\Customer\BookingDetails.cshtml.g.cs
 C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\obj\Debug\netcoreapp3.1\Razor\Views\Customer\BookingExecutive.cshtml.g.cs
 C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\obj\Debug\netcoreapp3.1\Razor\Views\Customer\BookingStatus.cshtml.g.cs
 C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\obj\Debug\netcoreapp3.1\Razor\Views\Customer\DeleteCustomerInfo.cshtml.g.cs
 C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\obj\Debug\netcoreapp3.1\Razor\Views\Customer\EditCustomerInfo.cshtml.g.cs
+C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\obj\Debug\netcoreapp3.1\Razor\Views\Customer\Error.cshtml.g.cs
+C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\obj\Debug\netcoreapp3.1\Razor\Views\Customer\Home.cshtml.g.cs
+C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\obj\Debug\netcoreapp3.1\Razor\Views\Customer\Profile.cshtml.g.cs
 C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\obj\Debug\netcoreapp3.1\Razor\Views\Customer\Register.cshtml.g.cs
 C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\obj\Debug\netcoreapp3.1\Razor\Views\DeliveryBook\AddBooking.cshtml.g.cs
+C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\obj\Debug\netcoreapp3.1\Razor\Views\Executive\BookingDetailById.cshtml.g.cs
+C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\obj\Debug\netcoreapp3.1\Razor\Views\Executive\BookingDetailByOrderId.cshtml.g.cs
+C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\obj\Debug\netcoreapp3.1\Razor\Views\Executive\BookingDetails.cshtml.g.cs
+C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\obj\Debug\netcoreapp3.1\Razor\Views\Executive\BookingRequests.cshtml.g.cs
 C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\obj\Debug\netcoreapp3.1\Razor\Views\Executive\DeleteExecutiveInfo.cshtml.g.cs
 C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\obj\Debug\netcoreapp3.1\Razor\Views\Executive\EditExecutiveInfo.cshtml.g.cs
+C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\obj\Debug\netcoreapp3.1\Razor\Views\Executive\Error.cshtml.g.cs
+C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\obj\Debug\netcoreapp3.1\Razor\Views\Executive\Home.cshtml.g.cs
+C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\obj\Debug\netcoreapp3.1\Razor\Views\Executive\Profile.cshtml.g.cs
 C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\obj\Debug\netcoreapp3.1\Razor\Views\Executive\Register.cshtml.g.cs
+C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\obj\Debug\netcoreapp3.1\Razor\Views\Executive\TrackOrder.cshtml.g.cs
+C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\obj\Debug\netcoreapp3.1\Razor\Views\Home\ContactUs.cshtml.g.cs
 C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
 C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\obj\Debug\netcoreapp3.1\Razor\Views\Home\Privacy.cshtml.g.cs
 C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs
 C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs
 C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
+C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\obj\Debug\netcoreapp3.1\Razor\Views\User\Error.cshtml.g.cs
 C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\obj\Debug\netcoreapp3.1\Razor\Views\User\Login.cshtml.g.cs
 C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\obj\Debug\netcoreapp3.1\Razor\Views\_ViewImports.cshtml.g.cs
 C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\obj\Debug\netcoreapp3.1\Razor\Views\_ViewStart.cshtml.g.cs
@@ -322,15 +339,6 @@ C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingS
 C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\obj\Debug\netcoreapp3.1\DeliveryBookingProject.csproj.CopyComplete
 C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\obj\Debug\netcoreapp3.1\DeliveryBookingProject.dll
 C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\obj\Debug\netcoreapp3.1\DeliveryBookingProject.pdb
-C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\obj\Debug\netcoreapp3.1\Razor\Views\Customer\Profile.cshtml.g.cs
-C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\obj\Debug\netcoreapp3.1\Razor\Views\Executive\Profile.cshtml.g.cs
-C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\obj\Debug\netcoreapp3.1\Razor\Views\Executive\BookingRequests.cshtml.g.cs
-C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\obj\Debug\netcoreapp3.1\Razor\Views\Executive\BookingDetailById.cshtml.g.cs
-C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\obj\Debug\netcoreapp3.1\Razor\Views\Executive\TrackOrder.cshtml.g.cs
-C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\obj\Debug\netcoreapp3.1\Razor\Views\Executive\BookingDetails.cshtml.g.cs
-C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\obj\Debug\netcoreapp3.1\Razor\Views\Executive\BookingDetailByOrderId.cshtml.g.cs
-C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\obj\Debug\netcoreapp3.1\Razor\Views\Customer\Home.cshtml.g.cs
-C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\obj\Debug\netcoreapp3.1\Razor\Views\Admin\Home.cshtml.g.cs
-C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\obj\Debug\netcoreapp3.1\Razor\Views\Executive\Home.cshtml.g.cs
-C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\obj\Debug\netcoreapp3.1\Razor\Views\Customer\BookingDetails.cshtml.g.cs
-C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\obj\Debug\netcoreapp3.1\Razor\Views\Admin\View.cshtml.g.cs
+C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\obj\Debug\netcoreapp3.1\DeliveryBookingProject.genruntimeconfig.cache
+C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\bin\Debug\netcoreapp3.1\xunit.abstractions.dll
+C:\Users\tikum\Desktop\Final Project\Training-Final-Project\src\DeliveryBookingSolution\DeliveryBookingProject\bin\Debug\netcoreapp3.1\xunit.core.dll
