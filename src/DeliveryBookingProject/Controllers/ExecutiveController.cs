@@ -149,7 +149,7 @@ namespace DeliveryBookingProject.Controllers
                 List<DeliveryBooking> bookings = _repoBooking.GetAllInfo().Where(a => a.ExecutiveId == Exec_id && a.BookingStatus == "CustomerRequest").ToList();
                 foreach (var item in bookings)
                 {
-                    if (item.PickUpDateTime < DateTime.Now && item.BookingStatus == "CustomerRequest")
+                    if (item.PickUpDateTime < DateTime.Now && item.BookingStatus == "CustomerRequest")//Need analyse
                     {
                         item.BookingStatus = "ExecutiveReject";
                         item.ResMessage = "No Not Available";
@@ -180,10 +180,18 @@ namespace DeliveryBookingProject.Controllers
                 DeliveryBooking delivery = _repoBooking.GetById(Id);
                 if (delivery != null && delivery.BookingStatus== "CustomerRequest")
                 {
-                    Customer customer = _repoCustomer.GetById(delivery.CustomerId);
-                    TempData["Address"] = customer.Address.ToString();
-                    TempData["City"] = customer.City.ToString();//.Concat(customer.City);
-                    return View(delivery);
+                    if (TempData.Peek("ExeID").Equals(delivery.ExecutiveId))
+                    {
+                        Customer customer = _repoCustomer.GetById(delivery.CustomerId);
+                        TempData["Address"] = customer.Address.ToString();
+                        TempData["City"] = customer.City.ToString();//.Concat(customer.City);
+                        return View(delivery);
+                    }
+                    else
+                    {
+                        TempData["Msg"] = "Not Eligible";
+                        return RedirectToAction("Error", "Customer");
+                    }
                 }
                 else
                 {

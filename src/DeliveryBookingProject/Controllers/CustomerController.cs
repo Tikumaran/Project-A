@@ -47,6 +47,7 @@ namespace DeliveryBookingProject.Controllers
                 }
                 else
                 {
+                    TempData["Msg"] = "UserName Exists";
                     return RedirectToAction("Error");
                 }
             }
@@ -190,8 +191,8 @@ namespace DeliveryBookingProject.Controllers
             catch (Exception e)
             {
                 _logger.LogDebug(e.Message);
+                return View();
             }
-            return NoContent();
         }
         public ActionResult BookingDetailById(int Id)
         {
@@ -200,7 +201,15 @@ namespace DeliveryBookingProject.Controllers
                 DeliveryBooking delivery = _repoBooking.GetById(Id);
                 if (delivery != null)
                 {
-                    return View(delivery);
+                    if (TempData.Peek("UserID").Equals(delivery.CustomerId))
+                    {
+                         return View(delivery);
+                    }
+                    else
+                    {
+                        TempData["Msg"] = "Not Eligible";
+                        return RedirectToAction("Error", "Customer");
+                    }
                 }
                 else
                 {
@@ -210,8 +219,8 @@ namespace DeliveryBookingProject.Controllers
             catch (Exception e)
             {
                 _logger.LogDebug(e.Message);
+                return View();
             }
-            return View();
         }
         // GET: CustomerController/Details/5
         public ActionResult BookingDetails()
@@ -228,6 +237,7 @@ namespace DeliveryBookingProject.Controllers
                         _repoBooking.EditInfo(item);
                     }
                 }
+                bookings= _repoBooking.GetAllInfo().Where(a => a.CustomerId == Cust_id).ToList();
                 if (bookings.Count() != 0)
                 {
                     return View(bookings);
@@ -242,7 +252,6 @@ namespace DeliveryBookingProject.Controllers
                 _logger.LogDebug(e.Message);
                 return View();
             }
-            
         }
         public ActionResult Logout()
         {

@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace DeliveryBookingProject.Models
@@ -29,7 +31,7 @@ namespace DeliveryBookingProject.Models
         [Display(Name ="Pick Up Date and Time")]
         [DataType(DataType.DateTime)]
         public DateTime PickUpDateTime { get; set; }
-
+        
         [Display(Name = "Booking Status")]
         public string BookingStatus { get; set; }
 

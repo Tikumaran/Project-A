@@ -212,6 +212,7 @@ namespace DeliveryBookingProject.Controllers
                         _repoDelivery.EditInfo(item);
                     }
                 }
+                bookings= _repoDelivery.GetAllInfo().ToList();
                 if (bookings.Count() != 0)
                 {
                     return View(bookings);

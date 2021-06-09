@@ -31,7 +31,7 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    @using (Html.BeginForm("AddBooking", "DeliveryBook", new { Id = item.ExecutiveId, Name = item.ExecutiveName }, FormMethod.Get))
+                    @using (Html.BeginForm("AddBooking", "DeliveryBook", new { Id = item.ExecutiveId}, FormMethod.Get))
                     {
                         <td>
                             @Html.DisplayFor(modelItem => item.ExecutiveName)
