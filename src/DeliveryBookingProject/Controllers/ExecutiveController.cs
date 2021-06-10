@@ -46,6 +46,7 @@ namespace DeliveryBookingProject.Controllers
                 }
                 else
                 {
+                    TempData["Msg"] = "UserName Exists";
                     return RedirectToAction("Error");
                 }
             }
@@ -190,7 +191,7 @@ namespace DeliveryBookingProject.Controllers
                     else
                     {
                         TempData["Msg"] = "Not Eligible";
-                        return RedirectToAction("Error", "Customer");
+                        return RedirectToAction("Error", "Executive");
                     }
                 }
                 else
@@ -201,8 +202,8 @@ namespace DeliveryBookingProject.Controllers
             catch (Exception e)
             {
                 _logger.LogDebug(e.Message);
-            }
-            return View();
+                return View();
+            }            
         }
         [HttpPost]
         public ActionResult EditRequests(DeliveryBooking booking,string accept,string reject)
@@ -238,7 +239,7 @@ namespace DeliveryBookingProject.Controllers
             try
             {
                 int Exec_id = Convert.ToInt32(TempData.Peek("ExeID"));
-                List<DeliveryBooking> bookings = _repoBooking.GetAllInfo().Where(a => a.ExecutiveId == Exec_id && a.BookingStatus == "ExecutiveAccept" && a.PickUpDateTime >= DateTime.Now).ToList();
+                List<DeliveryBooking> bookings = _repoBooking.GetAllInfo().Where(a => a.ExecutiveId == Exec_id && a.BookingStatus == "ExecutiveAccept" && a.PickUpDateTime.Date >= DateTime.Today.Date).ToList();
                 if (bookings.Count() != 0)
                 {
                     return View(bookings);
@@ -251,8 +252,8 @@ namespace DeliveryBookingProject.Controllers
             catch (Exception e)
             {
                 _logger.LogDebug(e.Message);
+                return View();
             }
-            return View();
         }
         // GET: CustomerController/Details/5
         public ActionResult BookingDetails()
@@ -291,18 +292,26 @@ namespace DeliveryBookingProject.Controllers
                 DeliveryBooking delivery = _repoBooking.GetById(Id);
                 if (delivery != null)
                 {
-                    return View(delivery);
+                    if (TempData.Peek("ExeID").Equals(delivery.ExecutiveId))
+                    {
+                        return View(delivery);
+                    }
+                    else
+                    {
+                        TempData["Msg"] = "Not Eligible";
+                        return RedirectToAction("Error", "Executive");
+                    }
                 }
                 else
                 {
-                    return View(delivery);
+                    return View();
                 }
             }
             catch (Exception e)
             {
                 _logger.LogDebug(e.Message);
+                return View();
             }
-            return View();
         }
         public ActionResult Logout()
         {

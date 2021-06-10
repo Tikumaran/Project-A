@@ -66,7 +66,6 @@ namespace DeliveryBookingProject.Controllers
             {
                 if(Records.IsVerified == "Verified")
                 {
-                    TempData.Clear();
                     TempData["UserID"] = Records.CustomerId;
                     TempData["City"] = Records.City;
                     //TempData["UserName"] = Records.UserName;

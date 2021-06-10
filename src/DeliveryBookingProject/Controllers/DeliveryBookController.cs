@@ -76,15 +76,6 @@ namespace DeliveryBookingProject.Controllers
             }
             return View();
         }
-        [HttpPost]
-        public ActionResult ValidateDateGreater(DateTime Date)
-        {
-            // validate your date here and return True if validated
-            if (Date.Date > DateTime.Today.Date)
-            {
-                return Json(true);
-            }
-            return Json(false);
-        }
+        
     }
 }

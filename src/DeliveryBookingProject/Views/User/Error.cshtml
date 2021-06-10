@@ -1,8 +1,18 @@
-﻿
+﻿@if (TempData.Peek("ErrMsg").ToString() == "Incorrect UserName or Password")
+{
+    <script>
+        alert("Incorrect UserName or Password");
+        window.location.href = "Login";
+    </script>
+}
+else if (TempData.Peek("ErrMsg").ToString() == "Your Account was Not Verified")
+{
+    <script>
+        alert("Your Account was Not Verified");
+        window.location.href = "Login";
+    </script>
+}
 
-<h1>Error</h1>
 
-<hr />
-<h3>@TempData.Peek("ErrMsg") Try Again!!</h3>
 
 

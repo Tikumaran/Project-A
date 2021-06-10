@@ -3,9 +3,10 @@
 @{
     ViewData["Title"] = "Login";
 }
-@if (Model.UserName != null && Model.Password != null) { 
+@if (Model.UserName != null)
+{
     <script>
-        alert("Invalid UserName or Password and also Check Admin Verified Your Account or Not")
+        alert("Successfully Register");
     </script>
 }
 <h1>Login</h1>

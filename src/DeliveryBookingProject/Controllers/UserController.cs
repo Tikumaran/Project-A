@@ -41,7 +41,8 @@ namespace DeliveryBookingProject.Controllers
             }
             catch(Exception e)
             {
-                return RedirectToAction("Error", e.Message);
+                TempData["ErrMsg"] = e.Message;
+                return RedirectToAction("Error");
             }
         }
         [HttpPost]
