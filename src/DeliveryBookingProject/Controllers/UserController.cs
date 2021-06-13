@@ -48,25 +48,23 @@ namespace DeliveryBookingProject.Controllers
         [HttpPost]
         public ActionResult Login(User user)
         {
-            if (ModelState.IsValid)
+            if (user.UserName == "Apple" && user.UserType== null)
             {
-                if (user.UserName == "Apple" && user.Password == "Apple")
+                return RedirectToAction("AdminLogin", "Admin", user);
+            }
+            else if (ModelState.IsValid)
+            {
+                if (user.UserName != "Apple" && user.Password != "Apple" && user.UserType == "Customer")
                 {
-                    return RedirectToAction("AdminLogin", "Admin", user);
-                }
-                else if (user.UserName != "Apple" && user.Password != "Apple" && user.UserType == "Customer")
-                {
-                    //return(ActionResult)_customer.CustomerLogin(user);
                     return RedirectToAction("CustomerLogin", "Customer", user);
                 }
                 else if (user.UserName != "Apple" && user.Password != "Apple" && user.UserType == "Executive")
                 {
-                    //return(ActionResult)_customer.CustomerLogin(user);
                     return RedirectToAction("ExecutiveLogin", "Executive", user);
                 }
                 else
                 {
-                    TempData["ErrMsg"] = "Invalid UserName or Password";
+                    TempData["ErrMsg"] = "Incorrect UserName or Password";
                     return RedirectToAction("Error","User");
                 }
             }

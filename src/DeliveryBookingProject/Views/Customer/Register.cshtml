@@ -3,7 +3,14 @@
 @{
     ViewData["Title"] = "Register";
 }
-
+@if(TempData.Count() != 0)
+{
+<script>
+        alert("Registered Successfully");
+        window.location.href ='@Url.Action("Login", "User")';
+</script>
+    
+}
 <link rel="stylesheet" href="~/css/site.css" />
 <h1>Register Customer Details</h1>
 

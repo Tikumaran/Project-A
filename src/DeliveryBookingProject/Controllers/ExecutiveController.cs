@@ -36,13 +36,15 @@ namespace DeliveryBookingProject.Controllers
             if (ModelState.IsValid)
             {
                 var record = _repoExecutive.GetByUserName(executive.UserName);
-                if (record == null)
+                if (record == null && executive.UserName != "Apple")
                 {
                     executive.IsVerified = "Requested";
                     executive.City=executive.City.ToLower();
                     _repoExecutive.AddInfo(executive);
                     TempData["UserName"] = executive.UserName;
-                    return RedirectToAction("Login", "User");
+                    TempData["Success"] = "Registered";
+                    return View();
+                    //return RedirectToAction("Login", "User");
                 }
                 else
                 {

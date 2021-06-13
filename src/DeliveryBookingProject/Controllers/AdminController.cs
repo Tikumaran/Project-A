@@ -34,6 +34,11 @@ namespace DeliveryBookingProject.Controllers
                     TempData["AUName"] = user.UserName;
                     return RedirectToAction("Home");
                 }
+                else if(user.Password == null)
+                {
+                    TempData["ErrMsg"] = "Please Enter Password";
+                    return RedirectToAction("Error", "User");
+                }
                 else
                 {
                     TempData["ErrMsg"] = "Incorrect UserName or Password";
@@ -43,8 +48,8 @@ namespace DeliveryBookingProject.Controllers
             catch (Exception e)
             {
                 _logger.LogDebug(e.Message);
+                return RedirectToAction("Login", "User");
             }
-            return RedirectToAction("Login", "User");
         }
         public ActionResult Home()
         {

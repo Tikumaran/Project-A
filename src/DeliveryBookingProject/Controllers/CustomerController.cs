@@ -23,6 +23,7 @@ namespace DeliveryBookingProject.Controllers
             _repoExecutive = repoExecutive;
             _repoBooking = repoBooking;
             _logger = logger;
+            
         }
         [HttpGet]
         //GET: CustomerController/Register
@@ -37,13 +38,15 @@ namespace DeliveryBookingProject.Controllers
             if (ModelState.IsValid)
             {
                 var record = _repoCustomer.GetByUserName(customer.UserName);
-                if (record == null)
+                if (record == null && customer.UserName!="Apple")
                 {
                     customer.IsVerified = "Requested";
                     customer.City = customer.City.ToLower();
                     _repoCustomer.AddInfo(customer);
+                    TempData["Success"] = "Registered";
                     TempData["UserName"] = customer.UserName;
-                    return RedirectToAction("Login", "User");
+                    return View();
+                    //return RedirectToAction("Login", "User");
                 }
                 else
                 {
@@ -56,7 +59,6 @@ namespace DeliveryBookingProject.Controllers
                 return View(customer);
             }
         }
-        
         
         public IActionResult CustomerLogin(User user)
         {

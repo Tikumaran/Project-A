@@ -12,7 +12,6 @@ namespace DeliveryBookingProject.Models
         [Key]
         [Required(ErrorMessage = "Please Enter User Name")]
         [Display(Name = "User Name")]
-        [Remote(action: "VerifyUserName", controller: "Customer")]
         public string UserName { get; set; }
         [Required(ErrorMessage = "Please Enter Password")]
         [Display(Name = "Password")]
