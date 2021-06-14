@@ -1,5 +1,6 @@
 ﻿@if (TempData.Peek("ErrMsg").ToString() == "Incorrect UserName or Password")
 {
+    @TempData.Remove("ErrMsg")
     <script>
         alert("Incorrect UserName or Password");
         window.location.href = "Login";
@@ -7,6 +8,7 @@
 }
 else if (TempData.Peek("ErrMsg").ToString() == "Your Account was Not Verified")
 {
+    @TempData.Remove("ErrMsg");
     <script>
         alert("Your Account was Not Verified");
         window.location.href = "Login";
@@ -14,6 +16,7 @@ else if (TempData.Peek("ErrMsg").ToString() == "Your Account was Not Verified")
 }
 else if (TempData.Peek("ErrMsg").ToString() == "Please Enter Password")
 {
+    @TempData.Remove("ErrMsg");
     <script>
         alert("Please Enter Admin Password");
         window.location.href = "Login";

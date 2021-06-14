@@ -468,7 +468,6 @@ C:\Users\tikum\Desktop\Softura training\Project A\src\DeliveryBookingProject\bin
 C:\Users\tikum\Desktop\Softura training\Project A\src\DeliveryBookingProject\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.pdb
 C:\Users\tikum\Desktop\Softura training\Project A\src\DeliveryBookingProject\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 C:\Users\tikum\Desktop\Softura training\Project A\src\DeliveryBookingProject\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-C:\Users\tikum\Desktop\Softura training\Project A\src\DeliveryBookingProject\obj\Debug\netcoreapp3.1\DeliveryBookingProject.csprojAssemblyReference.cache
 C:\Users\tikum\Desktop\Softura training\Project A\src\DeliveryBookingProject\obj\Debug\netcoreapp3.1\DeliveryBookingProject.AssemblyInfoInputs.cache
 C:\Users\tikum\Desktop\Softura training\Project A\src\DeliveryBookingProject\obj\Debug\netcoreapp3.1\DeliveryBookingProject.AssemblyInfo.cs
 C:\Users\tikum\Desktop\Softura training\Project A\src\DeliveryBookingProject\obj\Debug\netcoreapp3.1\DeliveryBookingProject.csproj.CoreCompileInputs.cache
@@ -530,3 +529,4 @@ C:\Users\tikum\Desktop\Softura training\Project A\src\DeliveryBookingProject\obj
 C:\Users\tikum\Desktop\Softura training\Project A\src\DeliveryBookingProject\obj\Debug\netcoreapp3.1\DeliveryBookingProject.dll
 C:\Users\tikum\Desktop\Softura training\Project A\src\DeliveryBookingProject\obj\Debug\netcoreapp3.1\DeliveryBookingProject.pdb
 C:\Users\tikum\Desktop\Softura training\Project A\src\DeliveryBookingProject\obj\Debug\netcoreapp3.1\DeliveryBookingProject.genruntimeconfig.cache
+C:\Users\tikum\Desktop\Softura training\Project A\src\DeliveryBookingProject\obj\Debug\netcoreapp3.1\DeliveryBookingProject.csprojAssemblyReference.cache

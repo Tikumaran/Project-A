@@ -1,5 +1,7 @@
 ﻿@if (TempData.Peek("Msg").ToString() == "UserName Exists")
 {
+
+    @TempData.Remove("Msg")
     <script>
         alert("UserName is Already Exists Try Other");
         window.location.href = "Register";
@@ -7,6 +9,8 @@
 }
 else if (TempData.Peek("Msg").ToString() == "Not Eligible")
 {
+
+    @TempData.Remove("Msg")
     <script>
         alert("You Are Not Eligible for this Booking");
         window.location.href = "Home";

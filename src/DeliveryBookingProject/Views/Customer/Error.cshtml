@@ -1,5 +1,7 @@
 ﻿@if (TempData.Peek("Msg").ToString() == "UserName Exists")
 {
+
+    @TempData.Remove("Msg")
     <script>
         alert("UserName is Already Exists Try Other");
         window.location.href = "Register";
@@ -7,6 +9,8 @@
 }
 else if (TempData.Peek("Msg").ToString() == "Booking Is Exists")
 {
+
+    @TempData.Remove("Msg")
     <script>
         alert("Already Booked Executive in Same date");
         window.location.href = "BookingExecutive";
@@ -14,6 +18,8 @@ else if (TempData.Peek("Msg").ToString() == "Booking Is Exists")
 }
 else if (TempData.Peek("Msg").ToString() == "Not Eligible")
 {
+
+    @TempData.Remove("Msg")
     <script>
         alert("You Are Not Eligible for this Order");
         window.location.href = "Home";

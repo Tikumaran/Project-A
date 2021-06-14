@@ -23,7 +23,7 @@ namespace DeliveryBookingProject.Controllers
             _repoExecutive = repoExecutive;
             _repoDelivery = repoDelivery;
         }
-
+        
         [HttpGet]
         public IActionResult AdminLogin(User user)
         {
@@ -53,213 +53,395 @@ namespace DeliveryBookingProject.Controllers
         }
         public ActionResult Home()
         {
-            return View();
+            if (TempData.Count()>1 && TempData.Count() >= 3)
+            {
+                return RedirectToAction("Home", "Customer");    //from Customer Controller
+            }
+            else if (TempData.Count() > 1 && TempData.Count() == 2)
+            {
+                return RedirectToAction("Home", "Executive");   //from Executive Controller
+            }
+            else if (TempData.Count() == 1)
+            {
+                return View();                                  //from Admin Controller
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");       //from User or Home Controller
+            }
         }
         public ActionResult CustomerDetails()
         {
-            try
+            if (TempData.Count() > 1 && TempData.Count() >= 3)
             {
-                List<Customer> customers = _repoCustomer.GetAllInfo().ToList();
-                if (customers != null)
-                    return View(customers);
-                else
+                return RedirectToAction("Home", "Customer");
+            }
+            else if (TempData.Count() > 1 && TempData.Count() == 2)
+            {
+                return RedirectToAction("Home", "Executive");
+            }
+            else if (TempData.Count() == 1)
+            {
+                try
+                {
+                    List<Customer> customers = _repoCustomer.GetAllInfo().ToList();
+                    if (customers != null)
+                        return View(customers);
+                    else
+                        return View();
+                }
+                catch (Exception e)
+                {
+                    _logger.LogDebug(e.Message);
                     return View();
+                }                                               //from Admin Controller
             }
-            catch (Exception e)
+            else
             {
-                _logger.LogDebug(e.Message);
+                return RedirectToAction("Index", "Home");       //from User or Home Controller
             }
-            return View();
-
+           
         }
         public ActionResult ExecutiveDetails()
         {
-            try
+            if (TempData.Count() > 1 && TempData.Count() >= 3)
             {
-                List<DeliveryExecutive> executives = _repoExecutive.GetAllInfo().ToList();
-                if (executives != null)
-                    return View(executives);
-                else
+                return RedirectToAction("Home", "Customer");
+            }
+            else if (TempData.Count() > 1 && TempData.Count() == 2)
+            {
+                return RedirectToAction("Home", "Executive");
+            }
+            else if (TempData.Count() == 1)
+            {
+                try
+                {
+                    List<DeliveryExecutive> executives = _repoExecutive.GetAllInfo().ToList();
+                    if (executives != null)
+                        return View(executives);
+                    else
+                        return View();
+                }
+                catch (Exception e)
+                {
+                    _logger.LogDebug(e.Message);
                     return View();
+                }
             }
-            catch (Exception e)
+            else
             {
-                _logger.LogDebug(e.Message);
+                return RedirectToAction("Index", "Home");
             }
-            return View();
         }
         public ActionResult CustomerRequests()
         {
-            try
+            if (TempData.Count() > 1 && TempData.Count() >= 3)
             {
-                List<Customer> customers = _repoCustomer.GetAllInfo().ToList();
-                List<Customer> customer = customers.Where(a => a.IsVerified == "Requested").ToList();
-                if (customer.Count() != 0)
-                    return View(customer);
-                else
+                return RedirectToAction("Home", "Customer");
+            }
+            else if (TempData.Count() > 1 && TempData.Count() == 2)
+            {
+                return RedirectToAction("Home", "Executive");
+            }
+            else if (TempData.Count() == 1)
+            {
+                try
+                {
+                    List<Customer> customers = _repoCustomer.GetAllInfo().ToList();
+                    List<Customer> customer = customers.Where(a => a.IsVerified == "Requested").ToList();
+                    if (customer.Count() != 0)
+                        return View(customer);
+                    else
+                        return View();
+                }
+                catch (Exception e)
+                {
+                    _logger.LogDebug(e.Message);
                     return View();
+                }
             }
-            catch (Exception e)
+            else
             {
-                _logger.LogDebug(e.Message);
+                return RedirectToAction("Index", "Home");
             }
-            return View();
         }
         public ActionResult ExecutiveRequests()
         {
-            try
+            if (TempData.Count() > 1 && TempData.Count() >= 3)
             {
-                List<DeliveryExecutive> executives = _repoExecutive.GetAllInfo().ToList();
-                List<DeliveryExecutive> executive = executives.Where(a => a.IsVerified == "Requested").ToList();
-                if (executive.Count() != 0)
-                    return View(executive);
-                else
-                    //alert Box no content();
+                return RedirectToAction("Home", "Customer");
+            }
+            else if (TempData.Count() > 1 && TempData.Count() == 2)
+            {
+                return RedirectToAction("Home", "Executive");
+            }
+            else if(TempData.Count() == 1)
+            {
+                try
+                {
+                    List<DeliveryExecutive> executives = _repoExecutive.GetAllInfo().ToList();
+                    List<DeliveryExecutive> executive = executives.Where(a => a.IsVerified == "Requested").ToList();
+                    if (executive.Count() != 0)
+                        return View(executive);
+                    else
+                        //alert Box no content();
+                        return View();
+                }
+                catch (Exception e)
+                {
+                    _logger.LogDebug(e.Message);
                     return View();
+                }
             }
-            catch (Exception e)
+            else
             {
-                _logger.LogDebug(e.Message);
+                return RedirectToAction("Index", "Home");
             }
-            return View();
         }
         // GET: AdminController/Details/5
         public ActionResult CustomerProfile(int Id)
         {
-            try
+            if (TempData.Count() > 1 && TempData.Count() >= 3)
             {
-                Customer customer = _repoCustomer.GetById(Id);
-                if (customer != null)
-                    return View(customer);
-                return View();
+                return RedirectToAction("Home", "Customer");
             }
-            catch (Exception e)
+            else if (TempData.Count() > 1 && TempData.Count() == 2)
             {
-                _logger.LogDebug(e.Message);
+                return RedirectToAction("Home", "Executive");
             }
-            return View();
+            else if (TempData.Count() == 1)
+            {
+                try
+                {
+                    Customer customer = _repoCustomer.GetById(Id);
+                    if (customer != null)
+                        return View(customer);
+                    return View();
+                }
+                catch (Exception e)
+                {
+                    _logger.LogDebug(e.Message);
+                    return View();
+                }
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
         public ActionResult ExecutiveProfile(int Id)
         {
-            try
+            if (TempData.Count() > 1 && TempData.Count() >= 3)
             {
-                DeliveryExecutive executive = _repoExecutive.GetById(Id);
-                if (executive != null)
-                    return View(executive);
+                return RedirectToAction("Home", "Customer");
+            }
+            else if (TempData.Count() > 1 && TempData.Count() == 2)
+            {
+                return RedirectToAction("Home", "Executive");
+            }
+            else if(TempData.Count() == 1)
+            {
+                try
+                {
+                    DeliveryExecutive executive = _repoExecutive.GetById(Id);
+                    if (executive != null)
+                        return View(executive);
+                    return View();
+                }
+                catch (Exception e)
+                {
+                    _logger.LogDebug(e.Message);
+                }
                 return View();
             }
-            catch (Exception e)
+            else
             {
-                _logger.LogDebug(e.Message);
+                return RedirectToAction("Index", "Home");
             }
-            return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult EditCustomerRequest(int Id,Customer Status)
         {
-            try
+            if (TempData.Count() > 1 && TempData.Count() >= 3)
             {
-                Customer customer = _repoCustomer.GetById(Id);
-                if (customer != null)
+                return RedirectToAction("Home", "Customer");
+            }
+            else if (TempData.Count() > 1 && TempData.Count() == 2)
+            {
+                return RedirectToAction("Home", "Executive");
+            }
+            else if (TempData.Count() == 1)
+            {
+                try
                 {
-                    customer.IsVerified = Status.IsVerified;
-                    _repoCustomer.EditInfo(customer);
-                    return RedirectToAction("CustomerRequests");
+                    Customer customer = _repoCustomer.GetById(Id);
+                    if (customer != null)
+                    {
+                        customer.IsVerified = Status.IsVerified;
+                        _repoCustomer.EditInfo(customer);
+                        return RedirectToAction("CustomerRequests");
+                    }
+                    else
+                    {
+                        //alert there is no customer
+                        return NoContent();
+                    }
                 }
-                else
+                catch (Exception e)
                 {
-                    //alert there is no customer
-                    return NoContent();
+                    _logger.LogDebug(e.Message);
+                    return View();
                 }
             }
-            catch (Exception e)
+            else
             {
-                _logger.LogDebug(e.Message);
+                return RedirectToAction("Index", "Home");
             }
-            return View();
+            
         }
         [HttpPost]
         public ActionResult EditExecutiveRequest(int Id,DeliveryExecutive ExecutiveStatus)
         {
-            try
+            if (TempData.Count() > 1 && TempData.Count() >= 3)
             {
-                DeliveryExecutive executive = _repoExecutive.GetById(Id);
-                if (executive != null)
-                {
-                    executive.IsVerified = ExecutiveStatus.IsVerified;
-                    _repoExecutive.EditInfo(executive);
-                    return RedirectToAction("ExecutiveRequests");
-                }
-                else
-                {
-                    //alert there is no executive
-                    return NoContent();
-                }
+                return RedirectToAction("Home", "Customer");
             }
-            catch (Exception e)
+            else if (TempData.Count() > 1 && TempData.Count() == 2)
             {
-                _logger.LogDebug(e.Message);
+                return RedirectToAction("Home", "Executive");
             }
-            return View();
-        }
-        public ActionResult OrdersDetails()
-        {
-            try
+            else if(TempData.Count() == 1)
             {
-                List<DeliveryBooking> bookings = _repoDelivery.GetAllInfo().ToList();
-                foreach (var item in bookings)
+                try
                 {
-                    if (item.PickUpDateTime <= DateTime.Now && item.BookingStatus == "ExecutiveAccept")
+                    DeliveryExecutive executive = _repoExecutive.GetById(Id);
+                    if (executive != null)
                     {
-                        item.BookingStatus = "PackagePickUped";
-                        _repoDelivery.EditInfo(item);
+                        executive.IsVerified = ExecutiveStatus.IsVerified;
+                        _repoExecutive.EditInfo(executive);
+                        return RedirectToAction("ExecutiveRequests");
+                    }
+                    else
+                    {
+                        //alert there is no executive
+                        return NoContent();
                     }
                 }
-                bookings= _repoDelivery.GetAllInfo().ToList();
-                if (bookings.Count() != 0)
+                catch (Exception e)
                 {
-                    return View(bookings);
-                }
-                else
-                {
+                    _logger.LogDebug(e.Message);
                     return View();
                 }
             }
-            catch (Exception e)
+            else
             {
-                _logger.LogDebug(e.Message);
+                return RedirectToAction("Index", "Home");
             }
-            return View();
+        }
+        public ActionResult OrdersDetails()
+        {
+            if (TempData.Count() > 1 && TempData.Count() >= 3)
+            {
+                return RedirectToAction("Home", "Customer");
+            }
+            else if (TempData.Count() > 1 && TempData.Count() == 2)
+            {
+                return RedirectToAction("Home", "Executive");
+            }
+            else if (TempData.Count() == 1)
+            {
+                try
+                {
+                    List<DeliveryBooking> bookings = _repoDelivery.GetAllInfo().ToList();
+                    foreach (var item in bookings)
+                    {
+                        if (item.PickUpDateTime <= DateTime.Now && item.BookingStatus == "ExecutiveAccept")
+                        {
+                            item.BookingStatus = "PackagePickUped";
+                            _repoDelivery.EditInfo(item);
+                        }
+                    }
+                    bookings = _repoDelivery.GetAllInfo().ToList();
+                    if (bookings.Count() != 0)
+                    {
+                        return View(bookings);
+                    }
+                    else
+                    {
+                        return View();
+                    }
+                }
+                catch (Exception e)
+                {
+                    _logger.LogDebug(e.Message);
+                    return View();
+                }
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
         public ActionResult OrdersDetailsById(int Id)
         {
-            try
+            if (TempData.Count() > 1 && TempData.Count() >= 3)
             {
-                DeliveryBooking delivery = _repoDelivery.GetById(Id);
-                if (delivery != null)
+                return RedirectToAction("Home", "Customer");
+            }
+            else if (TempData.Count() > 1 && TempData.Count() == 2)
+            {
+                return RedirectToAction("Home", "Executive");
+            }
+            else if (TempData.Count() == 1)
+            {
+                try
                 {
-                    return View(delivery);
+                    DeliveryBooking delivery = _repoDelivery.GetById(Id);
+                    if (delivery != null)
+                    {
+                        return View(delivery);
+                    }
+                    else
+                    {
+                        return View(delivery);
+                    }
                 }
-                else
+                catch (Exception e)
                 {
-                    return View(delivery);
+                    _logger.LogDebug(e.Message);
+                    return View();
                 }
             }
-            catch (Exception e)
+            else
             {
-                _logger.LogDebug(e.Message);
+                return RedirectToAction("Index", "Home");
             }
-            return View();
+            
         }
         public ActionResult Logout()
         {
-            foreach (var key in TempData.Keys.ToList())
+            if (TempData.Count() > 1 && TempData.Count() >= 3)
             {
-                TempData.Remove(key);
+                return RedirectToAction("Home", "Customer");
             }
-            return RedirectToAction("Index", "Home");
+            else if (TempData.Count() > 1 && TempData.Count() == 2)
+            {
+                return RedirectToAction("Home", "Executive");
+            }
+            else if (TempData.Count() == 1)
+            {
+                foreach (var key in TempData.Keys.ToList())
+                {
+                    TempData.Remove(key);
+                }
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
     }
 }
