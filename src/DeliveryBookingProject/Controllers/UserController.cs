@@ -26,51 +26,81 @@ namespace DeliveryBookingProject.Controllers
         [HttpGet]
         public ActionResult Login()
         {
-            try
+            if (TempData.Count() > 1 && TempData.Count() >= 3)
             {
-                User user = new User();
-                if (TempData["UserName"] !=null)
-                {
-                    user.UserName = TempData.Peek("UserName").ToString();
-                    return View(user);
-                }
-                else
-                {
-                    return View(user);
-                }
+                return RedirectToAction("Home", "Customer");    //from Customer Controller
             }
-            catch(Exception e)
+            else if (TempData.Count() > 1 && TempData.Count() == 2)
             {
-                TempData["ErrMsg"] = e.Message;
-                return RedirectToAction("Error");
+                return RedirectToAction("Home", "Executive");   //from Executive Controller
+            }
+            else if (TempData.Count() == 1)
+            {
+                return RedirectToAction("Home", "Admin");   //from Admin Controller
+            }
+            else
+            {
+                try
+                {
+                    User user = new User();
+                    if (TempData["UserName"] != null)
+                    {
+                        user.UserName = TempData.Peek("UserName").ToString();
+                        return View(user);
+                    }
+                    else
+                    {
+                        return View(user);
+                    }
+                }
+                catch (Exception e)
+                {
+                    TempData["ErrMsg"] = e.Message;
+                    return RedirectToAction("Error");
+                }                                               //from User or Home Controller
             }
         }
         [HttpPost]
         public ActionResult Login(User user)
         {
-            if (user.UserName == "Apple" && user.UserType== null)
+            if (TempData.Count() > 1 && TempData.Count() >= 3)
             {
-                return RedirectToAction("AdminLogin", "Admin", user);
+                return RedirectToAction("Home", "Customer");    //from Customer Controller
             }
-            else if (ModelState.IsValid)
+            else if (TempData.Count() > 1 && TempData.Count() == 2)
             {
-                if (user.UserName != "Apple" && user.Password != "Apple" && user.UserType == "Customer")
-                {
-                    return RedirectToAction("CustomerLogin", "Customer", user);
-                }
-                else if (user.UserName != "Apple" && user.Password != "Apple" && user.UserType == "Executive")
-                {
-                    return RedirectToAction("ExecutiveLogin", "Executive", user);
-                }
-                else
-                {
-                    TempData["ErrMsg"] = "Incorrect UserName or Password";
-                    return RedirectToAction("Error","User");
-                }
+                return RedirectToAction("Home", "Executive");   //from Executive Controller
+            }
+            else if (TempData.Count() == 1)
+            {
+                return RedirectToAction("Home", "Admin");   //from Admin Controller
             }
             else
             {
-                return View(user);
+                if (user.UserName == "Apple" && user.UserType == null)
+                {
+                    return RedirectToAction("AdminLogin", "Admin", user);
+                }
+                else if (ModelState.IsValid)
+                {
+                    if (user.UserName != "Apple" && user.Password != "Apple" && user.UserType == "Customer")
+                    {
+                        return RedirectToAction("CustomerLogin", "Customer", user);
+                    }
+                    else if (user.UserName != "Apple" && user.Password != "Apple" && user.UserType == "Executive")
+                    {
+                        return RedirectToAction("ExecutiveLogin", "Executive", user);
+                    }
+                    else
+                    {
+                        TempData["ErrMsg"] = "Incorrect UserName or Password";
+                        return RedirectToAction("Error", "User");
+                    }
+                }
+                else
+                {
+                    return View(user);
+                }                                                   //from User or Home Controller
             }
         }        
         public ActionResult Error()

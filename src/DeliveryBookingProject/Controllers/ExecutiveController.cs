@@ -27,34 +27,62 @@ namespace DeliveryBookingProject.Controllers
         //GET: CustomerController/Register
         public ActionResult Register()
         {
-            DeliveryExecutive executive = new DeliveryExecutive();
-            return View(executive);
+            if (TempData.Count() > 1 && TempData.Count() >= 3)
+            {
+                return RedirectToAction("Home", "Customer");    //from Customer Controller
+            }
+            else if (TempData.Count() > 1 && TempData.Count() == 2)
+            {
+                return RedirectToAction("Home", "Executive");   //from Executive Controller
+            }
+            else if (TempData.Count() == 1)
+            {
+                return RedirectToAction("Home", "Admin");        //from Admin Controller
+            }
+            else
+            {
+                return View();                                  //from User or Home Controller
+            }
         }
         [HttpPost]
         public ActionResult Register(DeliveryExecutive executive)
         {
-            if (ModelState.IsValid)
+            if (TempData.Count() > 1 && TempData.Count() >= 3)
             {
-                var record = _repoExecutive.GetByUserName(executive.UserName);
-                if (record == null && executive.UserName != "Apple")
+                return RedirectToAction("Home", "Customer");    //from Customer Controller
+            }
+            else if (TempData.Count() > 1 && TempData.Count() == 2)
+            {
+                if (ModelState.IsValid)
                 {
-                    executive.IsVerified = "Requested";
-                    executive.City=executive.City.ToLower();
-                    _repoExecutive.AddInfo(executive);
-                    TempData["UserName"] = executive.UserName;
-                    TempData["Success"] = "Registered";
-                    return View();
-                    //return RedirectToAction("Login", "User");
+                    var record = _repoExecutive.GetByUserName(executive.UserName);
+                    if (record == null && executive.UserName != "Apple")
+                    {
+                        executive.IsVerified = "Requested";
+                        executive.City = executive.City.ToLower();
+                        _repoExecutive.AddInfo(executive);
+                        TempData["UserName"] = executive.UserName;
+                        TempData["Success"] = "Registered";
+                        return View();
+                    }
+                    else
+                    {
+                        TempData["Msg"] = "UserName Exists";
+                        return RedirectToAction("Error");
+                    }
                 }
                 else
                 {
-                    TempData["Msg"] = "UserName Exists";
-                    return RedirectToAction("Error");
-                }
+                    return View(executive);
+                }                                               //from Executive Controller
+            }
+            else if (TempData.Count() == 1)
+            {
+                return RedirectToAction("Home", "Admin");         //from Admin Controller
             }
             else
             {
-                return View(executive);
+                return View();                                 //from User or Home Controller
             }
         }
        
@@ -86,275 +114,425 @@ namespace DeliveryBookingProject.Controllers
         }
         public ActionResult Home()
         {
-            int id = Convert.ToInt32(TempData.Peek("ExeID"));
-            return View();
+            if (TempData.Count() > 1 && TempData.Count() >= 3)
+            {
+                return RedirectToAction("Home", "Customer");    //from Customer Controller
+            }
+            else if (TempData.Count() > 1 && TempData.Count() == 2)
+            {
+                int id = Convert.ToInt32(TempData.Peek("ExeID"));
+                return View();                                  //from Executive Controller
+            }
+            else if (TempData.Count() == 1)
+            {
+                return RedirectToAction("Home", "Admin");         //from Admin Controller
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");       //from User or Home Controller
+            }
         }
         public ActionResult Profile()
         {
-            try
+            if (TempData.Count() > 1 && TempData.Count() >= 3)
             {
-                int id = Convert.ToInt32(TempData.Peek("ExeID"));
-                DeliveryExecutive executive = _repoExecutive.GetById(id);
-                if (executive != null)
-                    return View(executive);
+                return RedirectToAction("Home", "Customer");    //from Customer Controller
             }
-            catch (Exception e)
+            else if (TempData.Count() > 1 && TempData.Count() == 2)
             {
-                _logger.LogDebug(e.Message);
+                try
+                {
+                    int id = Convert.ToInt32(TempData.Peek("ExeID"));
+                    DeliveryExecutive executive = _repoExecutive.GetById(id);
+                    if (executive != null)
+                    {
+                        return View(executive);
+                    }
+                    else
+                    {
+                        return View(executive);
+                    }
+                }
+                catch (Exception e)
+                {
+                    _logger.LogDebug(e.Message);
+                    return View();                              //from Executive Controller
+                }
             }
-            return View();
+            else if (TempData.Count() == 1)
+            {
+                return RedirectToAction("Home", "Admin");        //from Admin Controller
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");       //from User or Home Controller
+            }
         }
         // GET: ExecutiveController/Edit/5
         public ActionResult EditExecutiveInfo()
         {
-            try
+            if (TempData.Count() > 1 && TempData.Count() >= 3)
             {
-                int id = Convert.ToInt32(TempData.Peek("ExeID"));
-                DeliveryExecutive executive = _repoExecutive.GetById(id);
-                if (executive != null)
-                    return View(executive);
+                return RedirectToAction("Home", "Customer");    //from Customer Controller
             }
-            catch (Exception e)
+            else if (TempData.Count() > 1 && TempData.Count() == 2)
             {
-                _logger.LogDebug(e.Message);
+                try
+                {
+                    int id = Convert.ToInt32(TempData.Peek("ExeID"));
+                    DeliveryExecutive executive = _repoExecutive.GetById(id);
+                    if (executive != null)
+                    {
+                        return View(executive);
+                    }
+                    else
+                    {
+                        return View(executive);
+                    }
+                }
+                catch (Exception e)
+                {
+                    _logger.LogDebug(e.Message);
+                    return View();                              //from Executive Controller
+                }                                               
             }
-            return View();
+            else if (TempData.Count() == 1)
+            {
+                return RedirectToAction("Home", "Admin");        //from Admin Controller
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");       //from User or Home Controller
+            }
         }
 
-        // POST: ExecutiveController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult EditExecutiveInfo(DeliveryExecutive executive)
         {
-            try
+            if (TempData.Count() > 1 && TempData.Count() >= 3)
             {
-                if (ModelState.IsValid)
-                {
-                    _repoExecutive.EditInfo(executive);
-                    return RedirectToAction("Profile");
-                }
-                else
-                {
-                    return View(executive);
-                }
+                return RedirectToAction("Home", "Customer");    //from Customer Controller
             }
-            catch (Exception e)
+            else if (TempData.Count() > 1 && TempData.Count() == 2)
             {
-                _logger.LogDebug(e.Message);
-            }
-            return View();
-        }
-        public ActionResult BookingRequests()
-        {
-            try
-            {
-                int Exec_id = Convert.ToInt32(TempData.Peek("ExeID"));
-                List<DeliveryBooking> bookings = _repoBooking.GetAllInfo().Where(a => a.ExecutiveId == Exec_id && a.BookingStatus == "CustomerRequest").ToList();
-                foreach (var item in bookings)
+                try
                 {
-                    if (item.PickUpDateTime < DateTime.Now && item.BookingStatus == "CustomerRequest")//Need analyse
+                    if (ModelState.IsValid)
                     {
-                        item.BookingStatus = "ExecutiveReject";
-                        item.ResMessage = "No Not Available";
-                        _repoBooking.EditInfo(item);
-                    }
-                }
-                bookings = _repoBooking.GetAllInfo().Where(a => a.ExecutiveId == Exec_id && a.BookingStatus == "CustomerRequest").ToList();
-                if (bookings.Count() != 0)
-                {
-                    return View(bookings);
-                }
-                else
-                {
-                    //nodata
-                    return View();
-                }
-            }
-            catch (Exception e)
-            {
-                _logger.LogDebug(e.Message);
-            }
-            return View();
-        }
-        public ActionResult BookingDetailById(int Id)
-        {
-            try
-            {
-                DeliveryBooking delivery = _repoBooking.GetById(Id);
-                if (delivery != null && delivery.BookingStatus== "CustomerRequest")
-                {
-                    if (TempData.Peek("ExeID").Equals(delivery.ExecutiveId))
-                    {
-                        Customer customer = _repoCustomer.GetById(delivery.CustomerId);
-                        TempData["Address"] = customer.Address.ToString();
-                        TempData["City"] = customer.City.ToString();//.Concat(customer.City);
-                        return View(delivery);
+                        _repoExecutive.EditInfo(executive);
+                        return RedirectToAction("Profile");
                     }
                     else
                     {
-                        TempData["Msg"] = "Not Eligible";
+                        return View(executive);
+                    }
+                }
+                catch (Exception e)
+                {
+                    _logger.LogDebug(e.Message);
+                    return View();                              //from Executive Controller
+                }
+            }
+            else if (TempData.Count() == 1)
+            {
+                return RedirectToAction("Home", "Admin");        //from Admin Controller
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");       //from User or Home Controller
+            }
+        }
+        public ActionResult BookingRequests()
+        {
+            if (TempData.Count() > 1 && TempData.Count() >= 3)
+            {
+                return RedirectToAction("Home", "Customer");                    //from Customer Controller
+            }
+            else if (TempData.Count() > 1 && TempData.Count() == 2)
+            {
+                try
+                {
+                    int Exec_id = Convert.ToInt32(TempData.Peek("ExeID"));
+                    List<DeliveryBooking> bookings = _repoBooking.GetAllInfo().Where(a => a.ExecutiveId == Exec_id && a.BookingStatus == "CustomerRequest").ToList();
+                    foreach (var item in bookings)
+                    {
+                        if (item.PickUpDateTime < DateTime.Now && item.BookingStatus == "CustomerRequest")//Need analyse
+                        {
+                            item.BookingStatus = "ExecutiveReject";
+                            item.ResMessage = "No Not Available";
+                            _repoBooking.EditInfo(item);
+                        }
+                    }
+                    bookings = _repoBooking.GetAllInfo().Where(a => a.ExecutiveId == Exec_id && a.BookingStatus == "CustomerRequest").ToList();
+                    if (bookings.Count() != 0)
+                    {
+                        return View(bookings);
+                    }
+                    else
+                    {
+                        return View(bookings);
+                    }
+                }
+                catch (Exception e)
+                {
+                    _logger.LogDebug(e.Message);
+                    return View();                              //from Executive Controller
+                }          
+            }
+            else if (TempData.Count() == 1)
+            {
+                return RedirectToAction("Home", "Admin");           //from Admin Controller
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");       //from User or Home Controller
+            }
+        }
+        public ActionResult BookingDetailById(int Id)
+        {
+            if (TempData.Count() > 1 && TempData.Count() >= 3)
+            {
+                return RedirectToAction("Home", "Customer");    //from Customer Controller
+            }
+            else if (TempData.Count() > 1 && TempData.Count() == 2)
+            {
+                try
+                {
+                    DeliveryBooking delivery = _repoBooking.GetById(Id);
+                    if (delivery != null && delivery.BookingStatus == "CustomerRequest")
+                    {
+                        if (TempData.Peek("ExeID").Equals(delivery.ExecutiveId))
+                        {
+                            Customer customer = _repoCustomer.GetById(delivery.CustomerId);
+                            TempData["Address"] = customer.Address.ToString();
+                            TempData["City"] = customer.City.ToString();//.Concat(customer.City);
+                            return View(delivery);
+                        }
+                        else
+                        {
+                            TempData["Msg"] = "Not Eligible";
+                            return RedirectToAction("Error", "Executive");
+                        }
+                    }
+                    else
+                    {
+                        return View(delivery);
+                    }
+                }
+                catch (Exception e)
+                {
+                    _logger.LogDebug(e.Message);
+                    return View();
+                }                                              //from Executive Controller
+            }
+            else if (TempData.Count() == 1)
+            {
+                return RedirectToAction("Home", "Admin");       //from Admin Controller
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");       //from User or Home Controller
+            }
+        }
+        [HttpPost]
+        public ActionResult EditRequests(DeliveryBooking booking,string action)
+        {
+            if (TempData.Count() > 1 && TempData.Count() >= 3)
+            {
+                return RedirectToAction("Home", "Customer");    //from Customer Controller
+            }
+            else if (TempData.Count() > 1 && TempData.Count() == 2)
+            {
+                try
+                {
+                    int order_id = Convert.ToInt32(TempData.Peek("Id"));
+                    DeliveryBooking delivery = _repoBooking.GetById(order_id);
+                    if (delivery != null)
+                    {
+                        if (action == "Accept")
+                        {
+                            delivery.BookingStatus = "ExecutiveAccept";
+                        }
+                        else if (action == "Reject")
+                        {
+                            delivery.BookingStatus = "ExecutiveReject";
+                        }
+                        delivery.ResMessage = booking.ResMessage;
+                        _repoBooking.EditInfo(delivery);
+                        return RedirectToAction("BookingRequests");
+                    }
+                    else
+                    {
+                        TempData["Msg"] = "Order Not Found";
                         return RedirectToAction("Error", "Executive");
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    return View();
+                    _logger.LogDebug(e.Message);
+                    return View();                               //from Executive Controller
                 }
             }
-            catch (Exception e)
+            else if (TempData.Count() == 1)
             {
-                _logger.LogDebug(e.Message);
-                return View();
-            }            
-        }
-        [HttpPost]
-        public ActionResult EditRequests(DeliveryBooking booking,string accept,string reject)
-        {
-            try
-            {
-                int order_id = Convert.ToInt32(TempData.Peek("Id"));
-                //string Res_message = TempData.Peek("Msg").ToString();
-                DeliveryBooking delivery = _repoBooking.GetById(order_id);
-                if (delivery != null)
-                {
-                    if (!string.IsNullOrEmpty(accept))
-                    {
-                        delivery.BookingStatus = "ExecutiveAccept";
-                    }
-                    if (!string.IsNullOrEmpty(reject))
-                    {
-                        delivery.BookingStatus = "ExecutiveReject";
-                    }
-                    delivery.ResMessage = booking.ResMessage;
-                    _repoBooking.EditInfo(delivery);
-                    return RedirectToAction("BookingRequests");
-                }
+                return RedirectToAction("Home", "Admin");             //from Admin Controller
             }
-            catch (Exception e)
+            else
             {
-                _logger.LogDebug(e.Message);
+                return RedirectToAction("Index", "Home");       //from User or Home Controller
             }
-            return NoContent();
         }
         public ActionResult TrackOrder()
         {
-            try
+            if (TempData.Count() > 1 && TempData.Count() >= 3)
             {
-                int Exec_id = Convert.ToInt32(TempData.Peek("ExeID"));
-                List<DeliveryBooking> bookings = _repoBooking.GetAllInfo().Where(a => a.ExecutiveId == Exec_id && a.BookingStatus == "ExecutiveAccept" && a.PickUpDateTime.Date >= DateTime.Today.Date).ToList();
-                if (bookings.Count() != 0)
-                {
-                    return View(bookings);
-                }
-                else
-                {
-                    return View();
-                }
+                return RedirectToAction("Home", "Customer");    //from Customer Controller
             }
-            catch (Exception e)
+            else if (TempData.Count() > 1 && TempData.Count() == 2)
             {
-                _logger.LogDebug(e.Message);
-                return View();
+                try
+                {
+                    int Exec_id = Convert.ToInt32(TempData.Peek("ExeID"));
+                    List<DeliveryBooking> bookings = _repoBooking.GetAllInfo().Where(a => a.ExecutiveId == Exec_id && a.BookingStatus == "ExecutiveAccept" && a.PickUpDateTime.Date >= DateTime.Today.Date).ToList();
+                    if (bookings.Count() != 0)
+                    {
+                        return View(bookings);
+                    }
+                    else
+                    {
+                        return View();
+                    }
+                }
+                catch (Exception e)
+                {
+                    _logger.LogDebug(e.Message);
+                    return View();
+                }                                               //from Executive Controller
+            }
+            else if (TempData.Count() == 1)
+            {
+                return RedirectToAction("Home", "Admin");        //from Admin Controller
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");       //from User or Home Controller
             }
         }
         // GET: CustomerController/Details/5
         public ActionResult BookingDetails()
         {
-            try
+            if (TempData.Count() > 1 && TempData.Count() >= 3)
             {
-                int Exec_id = Convert.ToInt32(TempData.Peek("ExeID"));
-                List<DeliveryBooking> bookings = _repoBooking.GetAllInfo().Where(a => a.ExecutiveId == Exec_id).ToList();
-                foreach (var item in bookings)
+                return RedirectToAction("Home", "Customer");    //from Customer Controller
+            }
+            else if (TempData.Count() > 1 && TempData.Count() == 2)
+            {
+                try
                 {
-                    if (item.PickUpDateTime < DateTime.Now && item.BookingStatus == "ExecutiveAccept")
+                    int Exec_id = Convert.ToInt32(TempData.Peek("ExeID"));
+                    List<DeliveryBooking> bookings = _repoBooking.GetAllInfo().Where(a => a.ExecutiveId == Exec_id).ToList();
+                    foreach (var item in bookings)
                     {
-                        item.BookingStatus = "PackagePickUped";
-                        _repoBooking.EditInfo(item);
+                        if (item.PickUpDateTime < DateTime.Now && item.BookingStatus == "ExecutiveAccept")
+                        {
+                            item.BookingStatus = "PackagePickUped";
+                            _repoBooking.EditInfo(item);
+                        }
                     }
-                }
-                if (bookings.Count() != 0)
-                {
-                    return View(bookings);
-                }
-                else
-                {
-                    return View();
-                }
-            }
-            catch (Exception e)
-            {
-                _logger.LogDebug(e.Message);
-            }
-            return View();
-        }
-        public ActionResult BookingDetailByOrderId(int Id)
-        {
-            try
-            { 
-                DeliveryBooking delivery = _repoBooking.GetById(Id);
-                if (delivery != null)
-                {
-                    if (TempData.Peek("ExeID").Equals(delivery.ExecutiveId))
+                    if (bookings.Count() != 0)
                     {
-                        return View(delivery);
+                        return View(bookings);
                     }
                     else
                     {
-                        TempData["Msg"] = "Not Eligible";
-                        return RedirectToAction("Error", "Executive");
+                        return View();
                     }
                 }
-                else
+                catch (Exception e)
                 {
+                    _logger.LogDebug(e.Message);
                     return View();
-                }
+                }                                               //from Executive Controller
             }
-            catch (Exception e)
+            else if (TempData.Count() == 1)
             {
-                _logger.LogDebug(e.Message);
-                return View();
+                return RedirectToAction("Home", "Admin");       //from Admin Controller
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");       //from User or Home Controller
+            }
+        }
+        public ActionResult BookingDetailByOrderId(int Id)
+        {
+            if (TempData.Count() > 1 && TempData.Count() >= 3)
+            {
+                return RedirectToAction("Home", "Customer");    //from Customer Controller
+            }
+            else if (TempData.Count() > 1 && TempData.Count() == 2)
+            {
+                try
+                {
+                    DeliveryBooking delivery = _repoBooking.GetById(Id);
+                    if (delivery != null)
+                    {
+                        if (TempData.Peek("ExeID").Equals(delivery.ExecutiveId))
+                        {
+                            return View(delivery);
+                        }
+                        else
+                        {
+                            TempData["Msg"] = "Not Eligible";
+                            return RedirectToAction("Error", "Executive");
+                        }
+                    }
+                    else
+                    {
+                        return View();
+                    }
+                }
+                catch (Exception e)
+                {
+                    _logger.LogDebug(e.Message);
+                    return View();
+                }                                               //from Executive Controller
+            }
+            else if (TempData.Count() == 1)
+            {
+                return RedirectToAction("Home", "Admin");       //from Admin Controller
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");       //from User or Home Controller
             }
         }
         public ActionResult Logout()
         {
-            foreach (var key in TempData.Keys.ToList())
+            if (TempData.Count() > 1 && TempData.Count() >= 3)
             {
-                TempData.Remove(key);
+                return RedirectToAction("Home", "Customer");    //from Customer Controller
             }
-            return RedirectToAction("Index","Home");
+            else if (TempData.Count() > 1 && TempData.Count() == 2)
+            {
+                foreach (var key in TempData.Keys.ToList())
+                {
+                    TempData.Remove(key);
+                }
+                return RedirectToAction("Index", "Home");       //from Executive Controller
+            }
+            else if (TempData.Count() == 1)
+            {
+                return RedirectToAction("Home", "Admin");          //from Admin Controller
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");       //from User or Home Controller
+            }
         }
         public ActionResult Error()
         {
             return View();
         }
-        /*// GET: ExecutiveController/Delete/5
-        public ActionResult DeleteExecutiveInfo()
-        {
-            int id = Convert.ToInt32(TempData.Peek("UserID"));
-            DeliveryExecutive executive = _repoExecutive.GetById(id);
-            return View(executive);
-        }
-        // POST: ExecutiveController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteExecutiveInfo(DeliveryExecutive executive)
-        {
-            try
-            {
-                if (executive != null)
-                {
-                    _repoExecutive.DeleteInfo(executive);
-                    return RedirectToAction("Login", "User");
-                }
-                else
-                {
-                    return NoContent();
-                }
-            }
-            catch
-            {
-                return View();
-            }
-        }*/
     }
 }

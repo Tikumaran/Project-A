@@ -16,5 +16,14 @@ else if (TempData.Peek("Msg").ToString() == "Not Eligible")
         window.location.href = "Home";
     </script>
 }
+else if (TempData.Peek("Msg").ToString() == "Order Not Found")
+{
+
+    @TempData.Remove("Msg")
+    <script>
+        alert("Order Not Found");
+        window.location.href = "BookingRequests";
+    </script>
+}
 
 
