@@ -55,9 +55,18 @@ namespace DeliveryBookingProject.Controllers
                     {
                         booking.BookingStatus = "CustomerRequest";
                         booking.Price = CalculatePrice(booking.WeightOfPackage);
-                        _repoBooking.AddInfo(booking);
-                        TempData["CustId"] = Cust_id;
-                        return RedirectToAction("BookingStatus", "Customer");
+                        bool result=_repoBooking.AddInfo(booking);
+                        if (result == true)
+                        {
+                            TempData["BSuccess"] = "BookingAdded";
+                            TempData["CustId"] = Cust_id;
+                            return View();
+                        }
+                        else
+                        {
+                            TempData["Msg"] = "Not BookingAdded";
+                            return RedirectToAction("Error", "Customer");
+                        }
                     }
                     else
                     {
@@ -72,9 +81,10 @@ namespace DeliveryBookingProject.Controllers
             }
             catch (Exception e)
             {
-                _logger.LogDebug(e.Message);
+                _logger.LogError(e.Message);
+                TempData["Msg"] = "Booking Is IN Error Check Log";
+                return RedirectToAction("Error", "Customer");
             }
-            return View();
         }
         
     }

@@ -18,16 +18,18 @@ namespace DeliveryBookingProject.Services
             _logger = logger;
         }
 
-        public void AddInfo(DeliveryExecutive executive)
+        public bool AddInfo(DeliveryExecutive executive)
         {
             try
             {
                 _context.Executives.Add(executive);
                 _context.SaveChanges();
+                return true;
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                _logger.LogDebug(ex.Message);
+                _logger.LogError(e.Message);
+                return false;
             }
         }
 
@@ -48,7 +50,7 @@ namespace DeliveryBookingProject.Services
             }
             catch (Exception e)
             {
-                _logger.LogDebug(e.Message);
+                _logger.LogError(e.Message);
             }
             return false;
         }
@@ -75,9 +77,9 @@ namespace DeliveryBookingProject.Services
                     return false;
                 }
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                _logger.LogDebug(ex.Message);
+                _logger.LogError(e.Message);
             }
             return false;
         }
@@ -92,7 +94,7 @@ namespace DeliveryBookingProject.Services
             }
             catch (Exception e)
             {
-                _logger.LogDebug(e.Message);
+                _logger.LogError(e.Message);
             }
             return null;
         }
@@ -106,7 +108,7 @@ namespace DeliveryBookingProject.Services
             }
             catch (Exception e)
             {
-                _logger.LogDebug(e.Message);
+                _logger.LogError(e.Message);
             }
             return null;
         }
@@ -119,7 +121,7 @@ namespace DeliveryBookingProject.Services
             }
             catch (Exception e)
             {
-                _logger.LogDebug(e.Message);
+                _logger.LogError(e.Message);
             }
             return null;
         }

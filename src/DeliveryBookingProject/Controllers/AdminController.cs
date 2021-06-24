@@ -47,7 +47,7 @@ namespace DeliveryBookingProject.Controllers
             }
             catch (Exception e)
             {
-                _logger.LogDebug(e.Message);
+                _logger.LogError(e.Message);
                 return RedirectToAction("Login", "User");
             }
         }
@@ -92,7 +92,7 @@ namespace DeliveryBookingProject.Controllers
                 }
                 catch (Exception e)
                 {
-                    _logger.LogDebug(e.Message);
+                    _logger.LogError(e.Message);
                     return View();
                 }                                               //from Admin Controller
             }
@@ -124,7 +124,7 @@ namespace DeliveryBookingProject.Controllers
                 }
                 catch (Exception e)
                 {
-                    _logger.LogDebug(e.Message);
+                    _logger.LogError(e.Message);
                     return View();
                 }
             }
@@ -156,7 +156,7 @@ namespace DeliveryBookingProject.Controllers
                 }
                 catch (Exception e)
                 {
-                    _logger.LogDebug(e.Message);
+                    _logger.LogError(e.Message);
                     return View();
                 }
             }
@@ -189,7 +189,7 @@ namespace DeliveryBookingProject.Controllers
                 }
                 catch (Exception e)
                 {
-                    _logger.LogDebug(e.Message);
+                    _logger.LogError(e.Message);
                     return View();
                 }
             }
@@ -220,7 +220,7 @@ namespace DeliveryBookingProject.Controllers
                 }
                 catch (Exception e)
                 {
-                    _logger.LogDebug(e.Message);
+                    _logger.LogError(e.Message);
                     return View();
                 }
             }
@@ -250,7 +250,7 @@ namespace DeliveryBookingProject.Controllers
                 }
                 catch (Exception e)
                 {
-                    _logger.LogDebug(e.Message);
+                    _logger.LogError(e.Message);
                 }
                 return View();
             }
@@ -291,7 +291,7 @@ namespace DeliveryBookingProject.Controllers
                 }
                 catch (Exception e)
                 {
-                    _logger.LogDebug(e.Message);
+                    _logger.LogError(e.Message);
                     return View();
                 }
             }
@@ -331,7 +331,7 @@ namespace DeliveryBookingProject.Controllers
                 }
                 catch (Exception e)
                 {
-                    _logger.LogDebug(e.Message);
+                    _logger.LogError(e.Message);
                     return View();
                 }
             }
@@ -375,7 +375,7 @@ namespace DeliveryBookingProject.Controllers
                 }
                 catch (Exception e)
                 {
-                    _logger.LogDebug(e.Message);
+                    _logger.LogError(e.Message);
                     return View();
                 }
             }
@@ -410,7 +410,7 @@ namespace DeliveryBookingProject.Controllers
                 }
                 catch (Exception e)
                 {
-                    _logger.LogDebug(e.Message);
+                    _logger.LogError(e.Message);
                     return View();
                 }
             }

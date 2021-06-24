@@ -7,7 +7,7 @@ namespace DeliveryBookingProject.Services
 {
     public interface IRepo<T>
     {
-        void AddInfo(T t);
+        bool AddInfo(T t);
         T GetById(int id);
         IEnumerable<T> GetAllInfo();
         bool EditInfo(T t);

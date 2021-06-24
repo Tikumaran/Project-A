@@ -18,16 +18,18 @@ namespace DeliveryBookingProject.Services
             _logger = logger;
         }
 
-        public void AddInfo(Customer customer)
+        public bool AddInfo(Customer customer)
         {
             try
             {
                 _context.Customers.Add(customer);
                 _context.SaveChanges();
+                return true;
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                _logger.LogDebug(ex.Message);
+                _logger.LogError(e.Message);
+                return false;
             }
         }
 
@@ -48,9 +50,9 @@ namespace DeliveryBookingProject.Services
             }
             catch (Exception e)
             {
-                _logger.LogDebug(e.Message);
+                _logger.LogError(e.Message);
+                return false;
             }
-            return false;
         }
 
         public bool EditInfo(Customer customer)
@@ -75,11 +77,11 @@ namespace DeliveryBookingProject.Services
                     return false;
                 }
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                _logger.LogDebug(ex.Message);
+                _logger.LogError(e.Message);
+                return false;
             }
-            return false;
         }
 
         public IEnumerable<Customer> GetAllInfo()
@@ -92,9 +94,9 @@ namespace DeliveryBookingProject.Services
             }
             catch (Exception e)
             {
-                _logger.LogDebug(e.Message);
+                _logger.LogError(e.Message);
+                return null;
             }
-            return null;
         }
 
         public Customer GetById(int id)
@@ -106,9 +108,9 @@ namespace DeliveryBookingProject.Services
             }
             catch (Exception e)
             {
-                _logger.LogDebug(e.Message);
+                _logger.LogError(e.Message);
+                return null;
             }
-            return null;
         }
 
         public Customer GetByUserName(string UserName)
@@ -120,9 +122,9 @@ namespace DeliveryBookingProject.Services
             }
             catch (Exception e)
             {
-                _logger.LogDebug(e.Message);
+                _logger.LogError(e.Message);
+                return null;
             }
-            return null;
         }
     }
 }

@@ -1,0 +1,5 @@
+2021-06-24T23:56:47.1974571+05:30  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-06-24T23:56:47.2279007+05:30  [INF] Hosting environment: "Development" (c3307c92)
+2021-06-24T23:56:47.2383877+05:30  [INF] Content root path: "C:\Users\tikum\Desktop\Softura training\Project A\src\DeliveryBookingProject" (b5d60022)
+2021-06-24T23:56:47.2801747+05:30 80000004-0002-fd00-b63f-84710c7967bb [WRN] Failed to determine the https port for redirect. (ca76cc21)
+2021-06-24T23:57:09.6198815+05:30 80000007-0002-fd00-b63f-84710c7967bb [INF] Sequence contains more than one element (4cfc03df)

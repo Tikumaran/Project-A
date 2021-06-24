@@ -25,5 +25,14 @@ else if (TempData.Peek("Msg").ToString() == "Order Not Found")
         window.location.href = "BookingRequests";
     </script>
 }
+else if (TempData.Peek("Msg").ToString() == "Not Registered")
+{
+
+    @TempData.Remove("Msg")
+    <script>
+        alert("Registration Not Succeed");
+        window.location.href = "Home";
+    </script>
+}
 
 

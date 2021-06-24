@@ -20,6 +20,7 @@ namespace DeliveryBookingProject.Controllers
 
         public IActionResult Index()
         {
+            TempData.Clear();
             return View();
         }
 

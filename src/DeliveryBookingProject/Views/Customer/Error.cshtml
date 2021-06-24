@@ -25,6 +25,31 @@ else if (TempData.Peek("Msg").ToString() == "Not Eligible")
         window.location.href = "Home";
     </script>
 }
+else if (TempData.Peek("Msg").ToString() == "Not Registered")
+{
 
+    @TempData.Remove("Msg")
+    <script>
+        alert("Registration Not Succeed");
+        window.location.href = "Home";
+    </script>
+}
+else if (TempData.Peek("Msg").ToString() == "Not BookingAdded")
+{
 
+    @TempData.Remove("Msg")
+    <script>
+        alert("Booking Not Succeed");
+        window.location.href = "BookingExecutive";
+    </script>
+}
+else if (TempData.Peek("Msg").ToString() == "Booking Is IN Error Check Log")
+{
+
+    @TempData.Remove("Msg")
+    <script>
+        alert("Booking Not Succeed Check Log");
+        window.location.href = "BookingExecutive";
+    </script>
+}
 

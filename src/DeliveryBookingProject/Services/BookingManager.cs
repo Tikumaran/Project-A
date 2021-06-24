@@ -19,16 +19,18 @@ namespace DeliveryBookingProject.Services
             _logger = logger;
         }
 
-        public void AddInfo(DeliveryBooking booking)
+        public bool AddInfo(DeliveryBooking booking)
         {
             try
             {
                 _context.DeliveryBookings.Add(booking);
                 _context.SaveChanges();
+                return true;
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                _logger.LogDebug(ex.Message);
+                _logger.LogError(e.Message);
+                return false;
             }
         }
 
@@ -49,9 +51,9 @@ namespace DeliveryBookingProject.Services
             }
             catch (Exception e)
             {
-                _logger.LogDebug(e.Message);
+                _logger.LogError(e.Message);
+                return false;
             }
-            return false;
         }
 
         public bool EditInfo(DeliveryBooking booking)
@@ -69,11 +71,11 @@ namespace DeliveryBookingProject.Services
                     return false;
                 }
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                _logger.LogDebug(ex.Message);
+                _logger.LogError(e.Message);
+                return false;
             }
-            return false;
         }
 
         public IEnumerable<DeliveryBooking> GetAllInfo()
@@ -83,12 +85,19 @@ namespace DeliveryBookingProject.Services
                 if (_context.DeliveryBookings.Count() == 0)
                     return null;
                 return _context.DeliveryBookings.ToList();
+                //return from b in _context.DeliveryBookings.ToList()
+                //       join c in _context.Customers.ToList() on b.CustomerId equals c.CustomerId
+                //       join e in _context.Executives.ToList() on b.ExecutiveId equals e.ExecutiveId
+                //       select new  {
+                        
+                //};
+                       
             }
             catch (Exception e)
             {
-                _logger.LogDebug(e.Message);
+                _logger.LogError(e.Message);
+                return null;
             }
-            return null;
         }
 
         public DeliveryBooking GetById(int id)
@@ -100,9 +109,9 @@ namespace DeliveryBookingProject.Services
             }
             catch (Exception e)
             {
-                _logger.LogDebug(e.Message);
+                _logger.LogError(e.Message);
+                return null;
             }
-            return null;
         }
 
         public DeliveryBooking GetByUserName(string UserName)

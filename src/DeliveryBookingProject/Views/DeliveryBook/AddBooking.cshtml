@@ -3,6 +3,14 @@
 @{
     ViewData["Title"] = "AddBooking";
 }
+@if (TempData.Count() == 6)
+{
+    @TempData.Remove("BSuccess")
+<script>
+        alert("Booking Executive is Success");
+        window.location.href ='@Url.Action("BookingStatus","Customer")';
+</script>
+}
 <script src="~/js/site.js"></script>
 <link rel="stylesheet" href="~/css/site.css" />
 <style src="~/css/site.css"></style>

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -23,8 +24,8 @@ namespace DeliveryBookingProject.Controllers
             _repoExecutive = repoExecutive;
             _repoBooking = repoBooking;
             _logger = logger;
-            
         }
+
         [HttpGet]
         //GET: CustomerController/Register
         public ActionResult Register()
@@ -67,10 +68,19 @@ namespace DeliveryBookingProject.Controllers
                     {
                         customer.IsVerified = "Requested";
                         customer.City = customer.City.ToLower();
-                        _repoCustomer.AddInfo(customer);
-                        TempData["Success"] = "Registered";
-                        TempData["UserName"] = customer.UserName;
-                        return View();
+                        bool result=_repoCustomer.AddInfo(customer);
+                        if(result == true)
+                        {
+                            TempData["Success"] = "Registered";
+                            TempData["UserName"] = customer.UserName;
+                            return View();
+                        }
+                        else
+                        {
+                            TempData["Msg"] = "Not Registered";
+                            return RedirectToAction("Error");
+                        }
+                        
                     }else
                     {
                         TempData["Msg"] = "UserName Exists";
@@ -149,7 +159,7 @@ namespace DeliveryBookingProject.Controllers
                 }
                 catch (Exception e)
                 {
-                    _logger.LogDebug(e.Message);
+                    _logger.LogError(e.Message);
                     return View();
                 }                                              //from Customer Controller
             }
@@ -180,7 +190,7 @@ namespace DeliveryBookingProject.Controllers
                 }
                 catch (Exception e)
                 {
-                    _logger.LogDebug(e.Message);
+                    _logger.LogError(e.Message);
                     return View();
                 }                                              //from Customer Controller
             }
@@ -219,7 +229,7 @@ namespace DeliveryBookingProject.Controllers
                 }
                 catch (Exception e)
                 {
-                    _logger.LogDebug(e.Message);
+                    _logger.LogError(e.Message);
                     return View();
                 }                                                //from Customer Controller
             }
@@ -258,7 +268,7 @@ namespace DeliveryBookingProject.Controllers
                 }
                 catch (Exception e)
                 {
-                    _logger.LogDebug(e.Message);
+                    _logger.LogError(e.Message);
                     return View();
                 }                                               //from Customer Controller
             }
@@ -295,7 +305,7 @@ namespace DeliveryBookingProject.Controllers
                 }
                 catch (Exception e)
                 {
-                    _logger.LogDebug(e.Message);
+                    _logger.LogError(e.Message);
                     return View();
                 }                                                //from Customer Controller
             }
@@ -338,7 +348,7 @@ namespace DeliveryBookingProject.Controllers
                 }
                 catch (Exception e)
                 {
-                    _logger.LogDebug(e.Message);
+                    _logger.LogError(e.Message);
                     return View();
                 }                                               //from Customer Controller
             }
@@ -384,7 +394,7 @@ namespace DeliveryBookingProject.Controllers
                 }
                 catch (Exception e)
                 {
-                    _logger.LogDebug(e.Message);
+                    _logger.LogError(e.Message);
                     return View();
                 }                                                //from Customer Controller
             }
@@ -424,9 +434,10 @@ namespace DeliveryBookingProject.Controllers
                 return RedirectToAction("Index", "Home");       //from User or Home Controller
             }
         }
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public ActionResult Error()
         {
-            return View();
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }
