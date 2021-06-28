@@ -539,6 +539,7 @@ namespace DeliveryBookingProject.Controllers
         }
         public ActionResult Error()
         {
+            _logger.LogInformation(TempData.Peek("Msg").ToString());
             return View();
         }
     }

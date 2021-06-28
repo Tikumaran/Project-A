@@ -27,11 +27,38 @@ namespace DeliveryBookingProject.Controllers
         [HttpGet("{id}")]
         public ActionResult AddBooking(int Id)
         {
-            DeliveryBooking delivery = new DeliveryBooking();
-            delivery.ExecutiveId = Id;
-            DeliveryExecutive executive = _repoExecutive.GetById(Id);
-            TempData["Exce_Name"] = executive.ExecutiveName;
-            return View(delivery);
+            if (TempData.Count() > 1 && TempData.Count() >= 3)
+            {
+                DeliveryExecutive executive = _repoExecutive.GetById(Id);
+                if(executive!= null && executive.City == TempData.Peek("City").ToString())
+                {
+                    TempData["Exce_Name"] = executive.ExecutiveName;
+                    DeliveryBooking delivery = new DeliveryBooking();
+                    delivery.ExecutiveId = Id;
+                    return View(delivery);
+                }else if(executive == null)
+                {
+                    TempData["Msg"] = "No Executives";
+                    return RedirectToAction("Error", "Customer");
+                }
+                else
+                {
+                    TempData["Msg"] = "Selecting Invalid Executive";
+                    return RedirectToAction("Error", "Customer");
+                }                                                //from Customer Controller
+            }
+            else if (TempData.Count() > 1 && TempData.Count() == 2)
+            {
+                return RedirectToAction("Home", "Executive");   //from Executive Controller
+            }
+            else if (TempData.Count() == 1)
+            {
+                return RedirectToAction("Home", "Admin");       //from Admin Controller
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");       //from User or Home Controller
+            }
         }
         public double CalculatePrice(double kg)
         {
@@ -44,47 +71,62 @@ namespace DeliveryBookingProject.Controllers
         [HttpPost("{id}")]
         public ActionResult AddBooking(DeliveryBooking booking)
         {
-            try
+            if (TempData.Count() > 1 && TempData.Count() >= 3)
             {
-                int Cust_id = Convert.ToInt32(TempData.Peek("UserID"));
-                booking.CustomerId = Cust_id;
-                booking.OrderDate = DateTime.Today;
-                List<DeliveryBooking> Records = _repoBooking.GetAllInfo().Where(a => a.CustomerId == Cust_id && a.PickUpDateTime.Date == booking.PickUpDateTime.Date).ToList();// checking Whether they Have Same Day on Delivery (in Process-- && a.BookingStatus.Equals(a.BookingStatus == "CustomerRequest" || a.BookingStatus == "ExecutiveAccept")
-                if (ModelState.IsValid)
+                try
                 {
-                    if(Records.Count == 0)
+                    int Cust_id = Convert.ToInt32(TempData.Peek("UserID"));
+                    booking.CustomerId = Cust_id;
+                    booking.OrderDate = DateTime.Today;
+                    List<DeliveryBooking> Records = _repoBooking.GetAllInfo().Where(a => a.CustomerId == Cust_id && a.PickUpDateTime.Date == booking.PickUpDateTime.Date).ToList();// checking Whether they Have Same Day on Delivery (in Process-- && a.BookingStatus.Equals(a.BookingStatus == "CustomerRequest" || a.BookingStatus == "ExecutiveAccept")
+                    if (ModelState.IsValid)
                     {
-                        booking.BookingStatus = "CustomerRequest";
-                        booking.Price = CalculatePrice(booking.WeightOfPackage);
-                        bool result=_repoBooking.AddInfo(booking);
-                        if (result == true)
+                        if (Records.Count == 0)
                         {
-                            TempData["BSuccess"] = "BookingAdded";
-                            TempData["CustId"] = Cust_id;
-                            return View();
+                            booking.BookingStatus = "CustomerRequest";
+                            booking.Price = CalculatePrice(booking.WeightOfPackage);
+                            bool result = _repoBooking.AddInfo(booking);
+                            if (result == true)
+                            {
+                                TempData["BSuccess"] = "BookingAdded";
+                                TempData["CustId"] = Cust_id;
+                                return View();
+                            }
+                            else
+                            {
+                                TempData["Msg"] = "Not BookingAdded";
+                                return RedirectToAction("Error", "Customer");
+                            }
                         }
                         else
                         {
-                            TempData["Msg"] = "Not BookingAdded";
+                            TempData["Msg"] = "Booking Is Exists";
                             return RedirectToAction("Error", "Customer");
                         }
                     }
                     else
                     {
-                        TempData["Msg"] = "Booking Is Exists";
-                        return RedirectToAction("Error", "Customer");
+                        return View(Records);//check
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    return View(Records);//check
-                }
+                    _logger.LogError(e.Message);
+                    TempData["Msg"] = "Booking Is IN Error Check Log";
+                    return RedirectToAction("Error", "Customer");
+                }                                                 //from Customer Controller
             }
-            catch (Exception e)
+            else if (TempData.Count() > 1 && TempData.Count() == 2)
             {
-                _logger.LogError(e.Message);
-                TempData["Msg"] = "Booking Is IN Error Check Log";
-                return RedirectToAction("Error", "Customer");
+                return RedirectToAction("Home", "Executive");   //from Executive Controller
+            }
+            else if (TempData.Count() == 1)
+            {
+                return RedirectToAction("Home", "Admin");       //from Admin Controller
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");       //from User or Home Controller
             }
         }
         

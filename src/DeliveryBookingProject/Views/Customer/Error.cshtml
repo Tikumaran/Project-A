@@ -1,6 +1,5 @@
 ﻿@if (TempData.Peek("Msg").ToString() == "UserName Exists")
 {
-
     @TempData.Remove("Msg")
     <script>
         alert("UserName is Already Exists Try Other");
@@ -49,6 +48,24 @@ else if (TempData.Peek("Msg").ToString() == "Booking Is IN Error Check Log")
     @TempData.Remove("Msg")
     <script>
         alert("Booking Not Succeed Check Log");
+        window.location.href = "BookingExecutive";
+    </script>
+}
+else if (TempData.Peek("Msg").ToString() == "No Executives")
+{
+
+    @TempData.Remove("Msg")
+    <script>
+        alert("No Executives");
+        window.location.href = "BookingExecutive";
+    </script>
+}
+else if (TempData.Peek("Msg").ToString() == "Selecting Invalid Executive")
+{
+
+    @TempData.Remove("Msg")
+    <script>
+        alert("Selecting Invalid Executive");
         window.location.href = "BookingExecutive";
     </script>
 }

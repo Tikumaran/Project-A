@@ -83,9 +83,17 @@ namespace DeliveryBookingProject.Services
             try
             {
                 if (_context.DeliveryBookings.Count() == 0)
+                {
                     return null;
-                return _context.DeliveryBookings.ToList();
-                //return 
+                }
+                else
+                {
+                    return _context.DeliveryBookings.ToList();
+                    //List<DeliveryBooking> booking = (List<DeliveryBooking>)_context.DeliveryBookings.Join(_context.Customers, b => b.CustomerId, c => c.CustomerId, (b, c) => new { b, c })
+                    //                                                .Join(_context.Executives, p => p.b.ExecutiveId, e => e.ExecutiveId, (p, e) => new { p, e });
+                    //return booking;
+                }
+                
 
             }
             catch (Exception e)

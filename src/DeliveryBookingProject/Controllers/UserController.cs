@@ -107,6 +107,7 @@ namespace DeliveryBookingProject.Controllers
         }
         public ActionResult Error()
         {
+            _logger.LogInformation(TempData.Peek("ErrMsg").ToString());
             return View();
         }
     }
