@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace DeliveryBookingProject.Controllers
 {
+    [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
     public class ExecutiveController : Controller
     {
         private IRepo<DeliveryExecutive> _repoExecutive;
@@ -524,10 +525,7 @@ namespace DeliveryBookingProject.Controllers
             }
             else if (TempData.Count() > 1 && TempData.Count() == 2)
             {
-                foreach (var key in TempData.Keys.ToList())
-                {
-                    TempData.Remove(key);
-                }
+                TempData.Clear();
                 return RedirectToAction("Index", "Home");       //from Executive Controller
             }
             else if (TempData.Count() == 1)
@@ -539,10 +537,9 @@ namespace DeliveryBookingProject.Controllers
                 return RedirectToAction("Index", "Home");       //from User or Home Controller
             }
         }
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public ActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View();
         }
     }
 }

@@ -9,7 +9,8 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace DeliveryBookingProject.Controllers
-{
+{ 
+    [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
     public class UserController : Controller
     {
         private ILogger<UserController> _logger;
@@ -17,7 +18,6 @@ namespace DeliveryBookingProject.Controllers
         public UserController(ILogger<UserController> logger)
         {
             _logger = logger;
-
         }
         // GET: UserController
         public IActionResult Index()
@@ -105,10 +105,9 @@ namespace DeliveryBookingProject.Controllers
                 }                                                   //from User or Home Controller
             }
         }
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public ActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View();
         }
     }
 }

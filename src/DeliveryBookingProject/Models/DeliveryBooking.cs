@@ -30,6 +30,7 @@ namespace DeliveryBookingProject.Models
         [Required(ErrorMessage ="Please Choose Pick Up Date and Time")]
         [Display(Name ="Pick Up Date and Time")]
         [DataType(DataType.DateTime)]
+        //[Validation(PickUpDateTime.Date>=DateTime.Today)]
         public DateTime PickUpDateTime { get; set; }
         
         [Display(Name = "Booking Status")]

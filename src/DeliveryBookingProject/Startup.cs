@@ -17,6 +17,7 @@ namespace DeliveryBookingProject
 {
     public class Startup
     {
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -33,6 +34,7 @@ namespace DeliveryBookingProject
             services.AddScoped<IRepo<Customer>, CustomerManager>();
             services.AddScoped<IRepo<DeliveryExecutive>, ExecutiveManager>();
             services.AddScoped<IRepo<DeliveryBooking>, BookingManager>();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -63,5 +65,6 @@ namespace DeliveryBookingProject
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
+
     }
 }

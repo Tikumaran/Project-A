@@ -11,13 +11,13 @@ using System.Threading.Tasks;
 
 namespace DeliveryBookingProject.Controllers
 {
+    [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true,Duration =0)]
     public class CustomerController : Controller
     {
         private IRepo<Customer> _repoCustomer;
         private IRepo<DeliveryExecutive> _repoExecutive;
         private IRepo<DeliveryBooking> _repoBooking;
         private ILogger<CustomerController> _logger;
-
         public CustomerController(IRepo<Customer> repoCustomer,IRepo<DeliveryExecutive> repoExecutive,IRepo<DeliveryBooking> repoBooking, ILogger<CustomerController> logger)
         {
             _repoCustomer = repoCustomer;
@@ -92,7 +92,6 @@ namespace DeliveryBookingProject.Controllers
                 }                                                   //from User or Home Controller
             }
         }
-        
         public IActionResult CustomerLogin(User user)
         {
             string UserName = user.UserName;
@@ -415,10 +414,7 @@ namespace DeliveryBookingProject.Controllers
         {
             if (TempData.Count() > 1 && TempData.Count() >= 3)
             {
-                foreach (var key in TempData.Keys.ToList())
-                {
-                    TempData.Remove(key);
-                }
+                TempData.Clear();
                 return RedirectToAction("Index", "Home");        //from Customer Controller
             }
             else if (TempData.Count() > 1 && TempData.Count() == 2)
@@ -434,10 +430,9 @@ namespace DeliveryBookingProject.Controllers
                 return RedirectToAction("Index", "Home");       //from User or Home Controller
             }
         }
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public ActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View();
         }
     }
 }

@@ -85,13 +85,8 @@ namespace DeliveryBookingProject.Services
                 if (_context.DeliveryBookings.Count() == 0)
                     return null;
                 return _context.DeliveryBookings.ToList();
-                //return from b in _context.DeliveryBookings.ToList()
-                //       join c in _context.Customers.ToList() on b.CustomerId equals c.CustomerId
-                //       join e in _context.Executives.ToList() on b.ExecutiveId equals e.ExecutiveId
-                //       select new  {
-                        
-                //};
-                       
+                //return 
+
             }
             catch (Exception e)
             {

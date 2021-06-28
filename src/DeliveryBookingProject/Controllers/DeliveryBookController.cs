@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace DeliveryBookingProject.Controllers
 {
+    [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
     public class DeliveryBookController : Controller
     {
         private IRepo<DeliveryBooking> _repoBooking;

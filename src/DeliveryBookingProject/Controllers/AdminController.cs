@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace DeliveryBookingProject.Controllers
 {
+    [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
     public class AdminController : Controller
     {
         private ILogger<AdminController> _logger;
@@ -432,10 +433,7 @@ namespace DeliveryBookingProject.Controllers
             }
             else if (TempData.Count() == 1)
             {
-                foreach (var key in TempData.Keys.ToList())
-                {
-                    TempData.Remove(key);
-                }
+                TempData.Clear();
                 return RedirectToAction("Index", "Home");
             }
             else
